@@ -8,8 +8,6 @@ services:
     image: twinkling-gecko/aodaishou:development
     volumes:
       - ./src/aodaishou:/usr/src/app:cached
-    environment:
-      - AXIOS_BASE_URL=http://localhost/api/v1/
     ports:
       - 3000:3000
 
