@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+
+  arduino-cli:
+    build: .
+    container_name: arduino-cli
+    volumes:
+      - $PWD:/tmp/arduino-cli/
+      - ./assets/Arduino/:/root/Arduino/
+      - ./assets/.arduino15/:/root/.arduino15/
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    working_dir: /tmp/arduino-cli/
+    entrypoint: ["arduino-cli"]
