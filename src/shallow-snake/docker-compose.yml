@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  aodaishou:
+    build:
+      context: ./src/aodaishou/
+      target: development
+    image: twinkling-gecko/aodaishou:development
+    volumes:
+      - ./src/aodaishou:/usr/src/app:cached
+    ports:
+      - 3000:3000
+
+  nishiki:
+    image: mysql:latest
+    volumes:
+      - ./.db:/var/lib/mysql:cached
+    environment:
+      - MYSQL_ROOT_PASSWORD=mamushi
+      - MYSQL_DATABASE=sparkling
+      - MYSQL_USER=nishiki
+      - MYSQL_PASSWORD=mamushi
+    ports:
+      - 3306:3306
