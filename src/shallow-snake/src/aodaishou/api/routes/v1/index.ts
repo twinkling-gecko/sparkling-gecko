@@ -1,9 +1,22 @@
 import { Router } from 'express'
+const router = Router()
 
-const v1Router = Router()
 
-v1Router.get('/', (req, res) => {
+/**
+ * @swagger
+ * /api/v1:
+ *   get:
+ *     tags: [v1]
+ *     description: get
+ *     responses:
+ *       200:
+ *         description: get test
+ *         examples:
+ *           result:
+ *             message: string
+ */
+router.get('/', (req, res) => {
   res.json({ message: 'this is v1 router'})
 })
 
-export default v1Router
+export default router
