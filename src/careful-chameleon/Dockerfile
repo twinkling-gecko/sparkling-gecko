@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-MAINTAINER kobar9568
+LABEL maintainer "kobar9568 <38117745+kobar9568@users.noreply.github.com>"
 
 # 依存関係のインストール
 RUN apt-get update &&\
