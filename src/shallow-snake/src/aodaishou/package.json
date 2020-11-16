@@ -8,6 +8,7 @@
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
     "generate:swagger": "swagger-jsdoc-generator api/swagger.config.js > ./api/swagger.json",
+    "typeorm": "ts-node ./node_modules/.bin/typeorm --config ormconfig.ts",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "lint": "yarn lint:js && yarn lint:style",
@@ -23,9 +24,13 @@
     "@nuxtjs/pwa": "^3.0.2",
     "bootstrap": "^4.5.2",
     "bootstrap-vue": "^2.17.3",
+    "class-validator": "^0.12.2",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
-    "nuxt": "^2.14.6"
+    "mysql2": "^2.2.5",
+    "nuxt": "^2.14.6",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.29"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.6",
@@ -56,9 +61,10 @@
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0",
     "swagger-jsdoc": "^5.0.1",
-    "swagger-ui-express": "^4.1.4",
     "swagger-jsdoc-generator": "^1.0.3",
+    "swagger-ui-express": "^4.1.4",
     "ts-jest": "^26.4.1",
+    "ts-node": "3.3.0",
     "vue-jest": "^3.0.4"
   }
 }

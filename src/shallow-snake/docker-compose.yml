@@ -10,6 +10,8 @@ services:
       - ./src/aodaishou:/usr/src/app:cached
     ports:
       - 3000:3000
+    depends_on:
+      - nishiki
 
   nishiki:
     image: mysql:latest
