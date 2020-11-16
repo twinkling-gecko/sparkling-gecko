@@ -1,0 +1,20 @@
+version: "3.0"
+services:
+
+  platformio:
+    build:
+      context: .
+      args:
+        USER_NAME: platformio
+        USER_ID: 1000
+    container_name: platformio
+    volumes:
+      - $PWD:/tmp/platformio/
+      - $PWD/packages/:/home/$USER/.platformio/packages/
+      - $PWD/platforms/:/home/$USER/.platformio/platforms/
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    working_dir: /tmp/platformio/
+    entrypoint: /home/$USER/.platformio/penv/bin/pio
