@@ -1,1 +1,9 @@
-build/
+.ccls
+.clang_complete
+.gcc-flags.json
+.pio
+include/
+lib/*
+!lib/.gitkeep
+packages/*
+!packages/.gitkeep
