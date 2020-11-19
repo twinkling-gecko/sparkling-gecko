@@ -1,36 +1,44 @@
 #include <BLEDevice.h>
 #include <BLEServer.h>
-#include <BLEUtils.h>
 #include <M5Stack.h>
 
-#define SERVICE_UUID "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
-#define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 #define DEVICE_NAME "calyptratus"
+
+const int SLEEPING_TIME = 3;                  // Deep Sleep time length (sec)
+const int ADVERTISING_TIME = 3;               // Advertising time length (sec)
+
+void setAdvertisementData(BLEAdvertising *pAdvertising) {
+  uint16_t data = (uint16_t)2047;             // User Payload (2byte)
+  std::string strData = "";
+  strData += (char)0xff;                      // AD Type (Manufacturer Specific Data)
+  strData += (char)0xff;                      // Company ID High byte (Test Manufacturer ID)
+  strData += (char)0xff;                      // Company ID Low byte (Test Manufacturer ID)
+  strData += (char)((data >> 8) & 0xff);      // User Payload High byte
+  strData += (char)(data & 0xff);             // User Payload Low byte
+  strData = (char)strData.length() + strData; // Length (AdvertisementData PDU)
+  BLEAdvertisementData oAdvertisementData = BLEAdvertisementData();
+  oAdvertisementData.setName(DEVICE_NAME);
+  oAdvertisementData.setFlags(0x06);          // LE General Discoverable Mode | BR_EDR_NOT_SUPPORTED
+  oAdvertisementData.addData(strData);
+  pAdvertising->setAdvertisementData(oAdvertisementData);
+}
 
 void setup() {
   M5.begin();
   M5.Power.begin();
   M5.Lcd.println("M5Stack launched.");
 
-  M5.Lcd.println("Starting BLE work!");
   BLEDevice::init(DEVICE_NAME);
   BLEServer *pServer = BLEDevice::createServer();
-  BLEService *pService = pServer->createService(SERVICE_UUID);
-  BLECharacteristic *pCharasteristic = pService->createCharacteristic(
-      CHARACTERISTIC_UUID,
-      BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_WRITE);
+  BLEAdvertising *pAdvertising = pServer->getAdvertising();
+  setAdvertisementData(pAdvertising);
 
-  pCharasteristic->setValue("Hello World! This is test characteristic.");
-  pService->start();
-
-  BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
-  pAdvertising->addServiceUUID(SERVICE_UUID);
-  pAdvertising->setScanResponse(true);
-  pAdvertising->setMinPreferred(
-      0x06); // functions that help with iPhone connections issue
-  pAdvertising->setMinPreferred(0x12);
-  BLEDevice::startAdvertising();
+  pAdvertising->start();
   M5.Lcd.println("Advertising...");
+  delay(ADVERTISING_TIME * 1000);
+  pAdvertising->stop();
+
+  esp_deep_sleep(SLEEPING_TIME * 1000000LL);
 }
 
 void loop() {}
