@@ -11,8 +11,6 @@ void setAdvertisementData(BLEAdvertising *pAdvertising) {
   uint16_t data = (uint16_t)2047;             // User Payload (2byte)
   std::string strData = "";
   strData += (char)0xff;                      // AD Type (Manufacturer Specific Data)
-  strData += (char)0xff;                      // Company ID High byte (Test Manufacturer ID)
-  strData += (char)0xff;                      // Company ID Low byte (Test Manufacturer ID)
   strData += (char)((data >> 8) & 0xff);      // User Payload High byte
   strData += (char)(data & 0xff);             // User Payload Low byte
   strData = (char)strData.length() + strData; // Length (AdvertisementData PDU)
