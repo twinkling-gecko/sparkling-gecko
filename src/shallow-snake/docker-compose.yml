@@ -7,7 +7,7 @@ services:
       target: development
     image: twinkling-gecko/aodaishou:development
     volumes:
-      - ./src/aodaishou:/usr/src/app:cached
+      - ./src/aodaishou:/usr/src/app
     ports:
       - 3000:3000
 
