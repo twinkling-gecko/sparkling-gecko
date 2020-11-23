@@ -1,7 +1,6 @@
 import { Router } from 'express'
 const router = Router()
 
-
 /**
  * @swagger
  * /api/v1:
@@ -16,7 +15,7 @@ const router = Router()
  *             message: string
  */
 router.get('/', (req, res) => {
-  res.json({ message: 'this is v1 router'})
+  res.json({ message: 'this is v1 router' })
 })
 
 export default router
