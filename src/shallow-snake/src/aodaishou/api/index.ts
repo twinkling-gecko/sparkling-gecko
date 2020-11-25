@@ -8,6 +8,7 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerConfig from './swagger.config'
 import { createConnection, getConnection } from 'typeorm'
+import bcrypt from 'bcrypt'
 
 import router from './routes'
 
@@ -31,15 +32,20 @@ passport.use(
     async (email, password, done) => {
       const user = await User.findOne({ email: email })
 
-      // FIXME: パスワードの暗号化処理
-      if (user?.encrypted_password === password) {
-        return done(null, { id: user.id, email: user.email })
+      if (comparePlainWithHash(password, user?.encrypted_password || '')) {
+        return done(null, { id: user?.id, email: user?.email })
       } else {
         return done(null, false, { message: 'invalid user' })
       }
     }
   )
 )
+
+const comparePlainWithHash = async (plainPassword: string, hash: string) => {
+  return await bcrypt.compare(plainPassword, hash, (_, result) => {
+    return result
+  })
+}
 
 passport.serializeUser(function (user: User, done) {
   done(null, user.id)
