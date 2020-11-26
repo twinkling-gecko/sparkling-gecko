@@ -2,13 +2,13 @@ import 'reflect-metadata'
 
 import express from 'express'
 import passport from 'passport'
-import { Strategy as LocalStrategy } from 'passport-local'
-import { User } from './entity/User'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerConfig from './swagger.config'
 import { createConnection, getConnection } from 'typeorm'
-import bcrypt from 'bcrypt'
+
+// passportの設定と関数の定義ファイル
+import './passport'
 
 import router from './routes'
 
@@ -25,36 +25,6 @@ const app = express()
 app.use(passport.initialize())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
-passport.use(
-  new LocalStrategy(
-    { usernameField: 'email', session: false },
-    async (email, password, done) => {
-      const user = await User.findOne({ email: email })
-
-      if (comparePlainWithHash(password, user?.encrypted_password || '')) {
-        return done(null, { id: user?.id, email: user?.email })
-      } else {
-        return done(null, false, { message: 'invalid user' })
-      }
-    }
-  )
-)
-
-const comparePlainWithHash = async (plainPassword: string, hash: string) => {
-  return await bcrypt.compare(plainPassword, hash, (_, result) => {
-    return result
-  })
-}
-
-passport.serializeUser(function (user: User, done) {
-  done(null, user.id)
-})
-
-passport.deserializeUser(async function (id: number, done) {
-  const user = await User.findOne(id)
-  done(null, user)
-})
 
 // FIXME: アプリケーションが持つべきものではないのでgithub pagesとかに静的ファイルとしてアップロードすべき
 if (process.env.node_env != 'production') {
