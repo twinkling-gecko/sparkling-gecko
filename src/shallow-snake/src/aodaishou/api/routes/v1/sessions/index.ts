@@ -17,8 +17,16 @@ const router = Router()
  *           result:
  *             message: string
  */
-router.post('/login', passport.authenticate('local'), (_, res) => {
-  res.json({ message: 'success' })
-})
+router.post(
+  '/login',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    session: true,
+  }),
+  (_, res) => {
+    res.json({ message: 'success' })
+  }
+)
 
 export default router
