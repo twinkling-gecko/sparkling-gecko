@@ -7,12 +7,23 @@ passport.use(
   new LocalStrategy(
     { usernameField: 'email', session: false },
     async (email, password, done) => {
-      const user = await User.findOne({ email: email })
+      let user: User | undefined
+      try {
+        user = await User.findOne({ email: email })
+      } catch (err) {
+        return done(err, false, {
+          message: 'failed to fetch data from the database',
+        })
+      }
 
-      if (comparePlainWithHash(password, user?.encrypted_password || '')) {
+      if (
+        user &&
+        comparePlainWithHash(password, user?.encrypted_password || '')
+      ) {
         return done(null, { id: user?.id, email: user?.email })
       } else {
-        return done(null, false, { message: 'invalid user' })
+        // emailに合致するuserが存在しないかpasswordが合致しない場合
+        return done(null, false, { message: 'invalid email or password' })
       }
     }
   )
