@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 
 import express from 'express'
+import session from 'express-session'
 import passport from 'passport'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJSDoc from 'swagger-jsdoc'
@@ -19,7 +20,15 @@ try {
 
 const app = express()
 
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.SESSION_SECRET || 'secret',
+  })
+)
 app.use(passport.initialize())
+app.use(passport.session())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
