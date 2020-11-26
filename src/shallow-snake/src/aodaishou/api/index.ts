@@ -7,9 +7,6 @@ import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerConfig from './swagger.config'
 import { createConnection, getConnection } from 'typeorm'
 
-// passportの設定と関数の定義ファイル
-import './passport'
-
 import router from './routes'
 
 // db connection
@@ -36,9 +33,5 @@ if (process.env.node_env != 'production') {
 }
 
 app.use(router)
-
-app.post('/session', passport.authenticate('local'), (_, res) => {
-  res.json({ message: 'success' })
-})
 
 export default app
