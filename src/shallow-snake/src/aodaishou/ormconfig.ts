@@ -13,6 +13,6 @@ export default {
   cli: {
     entitiesDir: 'api/entity',
     migrationsDir: 'api/migration',
-    subscribersDir: 'api/subscriber'
-  }
+    subscribersDir: 'api/subscriber',
+  },
 }
