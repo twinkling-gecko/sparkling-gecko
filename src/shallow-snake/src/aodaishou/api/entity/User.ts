@@ -21,12 +21,12 @@ export class User extends BaseEntity {
   @Column('text')
   encrypted_password: string
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: 'created_at', precision: 0 })
   createdAt: Date
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: 'updated_at', precision: 0 })
   updatedAt: Date
 
-  @DeleteDateColumn({ name: 'deleted_at' })
+  @DeleteDateColumn({ name: 'deleted_at', precision: 0 })
   deletedAt: Date
 }
