@@ -21,12 +21,28 @@ export class User extends BaseEntity {
   @Column('text')
   encrypted_password: string
 
-  @CreateDateColumn({ name: 'created_at', precision: 0 })
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at',
+    precision: 0,
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   createdAt: Date
 
-  @UpdateDateColumn({ name: 'updated_at', precision: 0 })
+  @UpdateDateColumn({
+    type: 'timestamp',
+    name: 'updated_at',
+    precision: 0,
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   updatedAt: Date
 
-  @DeleteDateColumn({ name: 'deleted_at', precision: 0 })
+  @DeleteDateColumn({
+    type: 'timestamp',
+    name: 'deleted_at',
+    precision: 0,
+    nullable: true,
+    default: null
+  })
   deletedAt: Date
 }
