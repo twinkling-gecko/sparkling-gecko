@@ -33,13 +33,13 @@ $ ./install_dependencies.sh
 #### fish
 
 ```
-$ docker-compose run -u (id -u $USER):(id -g $USER) platformio run
+$ docker-compose run --rm -u (id -u $USER):(id -g $USER) platformio run
 ```
 
 #### bash
 
 ```
-$ docker-compose run -u $(id -u $USER):$(id -g $USER) platformio run
+$ docker-compose run --rm -u $(id -u $USER):$(id -g $USER) platformio run
 ```
 
 ### スケッチのアップロード
@@ -47,13 +47,13 @@ $ docker-compose run -u $(id -u $USER):$(id -g $USER) platformio run
 #### fish
 
 ```
-$ docker-compose run -u (id -u $USER):(id -g $USER) platformio run --target upload
+$ docker-compose run --rm -u (id -u $USER):(id -g $USER) platformio run --target upload
 ```
 
 #### bash
 
 ```
-$ docker-compose run -u $(id -u $USER):$(id -g $USER) platformio run --target upload
+$ docker-compose run --rm -u $(id -u $USER):$(id -g $USER) platformio run --target upload
 ```
 
 #### LinuxでPermissionで怒られる場合
