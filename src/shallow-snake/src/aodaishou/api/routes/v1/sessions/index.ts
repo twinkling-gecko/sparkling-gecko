@@ -12,7 +12,6 @@ const router = Router()
  *     description: login
  *     responses:
  *       200:
- *         description: get test
  *         examples:
  *           result:
  *             message: string
