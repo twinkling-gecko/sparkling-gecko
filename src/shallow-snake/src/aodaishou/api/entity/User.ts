@@ -42,7 +42,7 @@ export class User extends BaseEntity {
     name: 'deleted_at',
     precision: 0,
     nullable: true,
-    default: null
+    default: null,
   })
   deletedAt: Date
 }
