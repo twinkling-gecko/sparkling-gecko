@@ -2,6 +2,7 @@
   <div id="sessions-new">
     <div class="text-center">
       <h1>welcome back, dear wild gecko.</h1>
+      <Logo />
     </div>
     <div class="container" style="max-width: 720px;">
       <b-form @submit="onSubmit" @reset="onReset">
