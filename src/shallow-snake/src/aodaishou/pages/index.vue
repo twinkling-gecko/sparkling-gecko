@@ -7,7 +7,10 @@
     <div>
       <Logo />
       <h1>sparkling-gecko</h1>
-      <div>
+      <div v-if="isAuthenticated">
+        Welcome Back!
+      </div>
+      <div v-else>
         <b-button size="lg" variant="success">Sign up</b-button>&nbsp;
         <b-button size="lg" variant="primary" to="sessions/new">Login</b-button>
       </div>
@@ -23,6 +26,7 @@ export default Vue.extend({
   data() {
     return {
       height: 0,
+      isAuthenticated: this.$store.getters.isAuthenticated
     }
   },
   created() {
