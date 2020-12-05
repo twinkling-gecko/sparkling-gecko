@@ -23,7 +23,7 @@ router.post(
     session: true,
   }),
   (_, res) => {
-    res.status(200).json({ message: 'message' })
+    res.status(200).json({ message: 'success' })
   }
 )
 
