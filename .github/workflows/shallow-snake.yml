@@ -1,7 +1,7 @@
 name: shallow-snake
 on: [push]
 jobs:
-  style-check-js:
+  lint-js:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -9,4 +9,13 @@ jobs:
       - run: npm install
         working-directory: ./src/shallow-snake/src/aodaishou
       - run: npm run lint:js
+        working-directory: ./src/shallow-snake/src/aodaishou
+  lint-style:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: npm install
+        working-directory: ./src/shallow-snake/src/aodaishou
+      - run: npm run lint:style
         working-directory: ./src/shallow-snake/src/aodaishou
