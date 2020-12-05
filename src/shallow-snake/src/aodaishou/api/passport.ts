@@ -16,12 +16,12 @@ passport.use(
         })
       }
 
-      const password_compared = await comparePlainWithHash(
+      const isCompared = await comparePlainWithHash(
         password,
         user?.encrypted_password || ''
       )
 
-      if (user && password_compared) {
+      if (user && isCompared) {
         return done(null, { id: user?.id, email: user?.email })
       } else {
         // emailに合致するuserが存在しないかpasswordが合致しない場合
