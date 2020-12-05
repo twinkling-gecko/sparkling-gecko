@@ -29,9 +29,8 @@ export default Vue.extend({
         .then(() => {
           this.$router.push('/')
         })
-        .catch((error) => {
-          console.log(error)
-        })
+        // FIXME: 失敗したことをユーザーに通知
+        .catch(err => {})
     },
   },
 })
