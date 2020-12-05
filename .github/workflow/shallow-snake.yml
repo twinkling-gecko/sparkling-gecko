@@ -1,0 +1,11 @@
+name: shallow-snake
+on: [push]
+jobs:
+  style-check-js:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: cd src/shallow-snake/src/aodaishou
+      - run: npm install
+      - run: npm run lint:js
