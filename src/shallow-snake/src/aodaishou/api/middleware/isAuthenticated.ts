@@ -4,6 +4,6 @@ export default (req: Request, res: Response, next: NextFunction) => {
   if (req.isAuthenticated()) {
     next()
   } else {
-    res.status(204).send()
+    res.status(403).send()
   }
 }
