@@ -2,14 +2,12 @@
   <div
     id="index"
     class="d-flex align-items-center justify-content-center text-center"
-    :style="{height: `${height}px`}"
+    :style="{ height: `${height}px` }"
   >
     <div>
       <Logo />
       <h1>sparkling-gecko</h1>
-      <div v-if="isAuthenticated">
-        Welcome Back!
-      </div>
+      <div v-if="isAuthenticated">Welcome Back!</div>
       <div v-else>
         <b-button size="lg" variant="success">Sign up</b-button>&nbsp;
         <b-button size="lg" variant="primary" to="sessions/new">Login</b-button>
@@ -29,13 +27,10 @@ export default Vue.extend({
       isAuthenticated: false,
     }
   },
-  created() {
-    if (process.client) {
-      window.addEventListener('resize', this.handleResize)
-      this.handleResize()
-    }
-  },
   mounted() {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+
     // FIXME: vuex-persistedstateのlocalStorageからの読み出しが遅れる問題
     setTimeout(() => {
       this.isAuthenticated = this.$store.getters.isAuthenticated
@@ -58,4 +53,3 @@ export default Vue.extend({
   height: 100vh;
 }
 </style>
-
