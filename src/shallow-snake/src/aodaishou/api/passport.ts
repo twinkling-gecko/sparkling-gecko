@@ -16,10 +16,12 @@ passport.use(
         })
       }
 
-      if (
-        user &&
-        comparePlainWithHash(password, user?.encrypted_password || '')
-      ) {
+      const isCompared = await comparePlainWithHash(
+        password,
+        user?.encrypted_password || ''
+      )
+
+      if (user && isCompared) {
         return done(null, { id: user?.id, email: user?.email })
       } else {
         // emailに合致するuserが存在しないかpasswordが合致しない場合
@@ -36,7 +38,6 @@ passport.serializeUser(function (user: User, done) {
 passport.deserializeUser(async function (id: number, done) {
   try {
     const user: User | undefined = await User.findOne({ id: id })
-    console.log(user)
     done(null, user)
   } catch (err) {
     done(err, false)
@@ -44,7 +45,5 @@ passport.deserializeUser(async function (id: number, done) {
 })
 
 const comparePlainWithHash = async (plainPassword: string, hash: string) => {
-  return await bcrypt.compare(plainPassword, hash, (_, result) => {
-    return result
-  })
+  return await bcrypt.compare(plainPassword, hash)
 }
