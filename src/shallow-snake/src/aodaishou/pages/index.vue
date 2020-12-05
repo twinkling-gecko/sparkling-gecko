@@ -9,7 +9,7 @@
       <h1>sparkling-gecko</h1>
       <div>
         <b-button size="lg" variant="success">Sign up</b-button>&nbsp;
-        <b-button size="lg" variant="primary">Login</b-button>
+        <b-button size="lg" variant="primary" to="sessions/new">Login</b-button>
       </div>
     </div>
   </div>
@@ -19,6 +19,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
+  layout: 'no_header',
   data() {
     return {
       height: 0,
