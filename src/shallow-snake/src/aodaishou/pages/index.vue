@@ -26,7 +26,7 @@ export default Vue.extend({
   data() {
     return {
       height: 0,
-      isAuthenticated: this.$store.getters.isAuthenticated
+      isAuthenticated: false,
     }
   },
   created() {
@@ -34,6 +34,12 @@ export default Vue.extend({
       window.addEventListener('resize', this.handleResize)
       this.handleResize()
     }
+  },
+  mounted() {
+    // FIXME: vuex-persistedstateのlocalStorageからの読み出しが遅れる問題
+    setTimeout(() => {
+      this.isAuthenticated = this.$store.getters.isAuthenticated
+    }, 0)
   },
   destroyed() {
     window.removeEventListener('resize', this.handleResize)
