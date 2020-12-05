@@ -73,9 +73,7 @@
     "stylelint": "^13.7.2",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0",
-    "swagger-jsdoc": "^5.0.1",
     "swagger-jsdoc-generator": "^1.0.3",
-    "swagger-ui-express": "^4.1.4",
     "ts-jest": "^26.4.1",
     "ts-node": "3.3.0",
     "vue-jest": "^3.0.4"
