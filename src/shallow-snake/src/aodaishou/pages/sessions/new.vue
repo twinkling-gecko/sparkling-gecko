@@ -4,8 +4,11 @@
       <h1>welcome back, dear wild gecko.</h1>
       <Logo />
     </div>
-    <div class="container" style="max-width: 720px;">
+    <div class="container my-2" style="max-width: 720px">
       <b-form @submit="onSubmit" @reset="onReset">
+        <b-alert :show="error !== ''" variant="danger">
+          {{ error }}
+        </b-alert>
         <b-form-group label="email" label-for="email">
           <b-form-input
             id="email"
@@ -44,13 +47,40 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
+  middleware: ['authenticated'],
   data() {
     return {
       form: {
         email: '',
         password: '',
       },
+      error: '',
     }
+  },
+  methods: {
+    onSubmit(event: Event) {
+      event.preventDefault()
+
+      this.$axios
+        .post('/api/v1/sessions/new', this.form)
+        .then(() => {
+          this.$store.dispatch('fetchUser')
+        })
+        .then(() => {
+          this.$router.push('/')
+        })
+        // FIXME: 失敗したことをユーザーに通知
+        .catch((err: Error) => {
+          this.error = err.toString()
+        })
+    },
+
+    onReset(event: Event) {
+      event.preventDefault()
+
+      this.form.email = ''
+      this.form.password = ''
+    },
   },
 })
 </script>

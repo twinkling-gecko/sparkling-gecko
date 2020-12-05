@@ -7,7 +7,7 @@ const router = Router()
 
 /**
  * @swagger
- * /api/v1/sessions:
+ * /api/v1/sessions/new:
  *   post:
  *     tags: [v1]
  *     description: login
@@ -18,7 +18,7 @@ const router = Router()
  *             message: string
  */
 router.post(
-  '/login',
+  '/new',
   passport.authenticate('local', {
     session: true,
   }),
