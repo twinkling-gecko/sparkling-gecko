@@ -1,0 +1,24 @@
+<template lang="pug">
+  GraphContainer(title="残量")
+    GraphDetergent
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import GraphContainer from '@/components/demo/GraphContainer.vue'
+import GraphDetergent from '@/components/demo/GraphDetergent.vue'
+
+export default Vue.extend({
+  layout: 'dashboard',
+  components: {
+    GraphDetergent,
+  },
+})
+</script>
+
+<style lang="sass" scoped>
+.graph-container
+  margin: 8px
+  max-height: 600px
+  max-width: 600px
+</style>
