@@ -20,12 +20,10 @@ const router = Router()
 router.post(
   '/login',
   passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
     session: true,
   }),
   (_, res) => {
-    res.json({ message: 'success' })
+    res.status(200).json({ message: 'message' })
   }
 )
 
