@@ -1,18 +1,21 @@
 <template lang="pug">
-  b-container#container(fluid)
-    b-row#content
-      b-col.sidebar-container
-        Sidebar
-      b-col(cols="10")
-        Nuxt
+  DefaultLayout
+    b-container#container(fluid)
+      b-row#content
+        b-col.sidebar-container
+          Sidebar
+        b-col(cols="10")
+          Nuxt
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import DefaultLayout from './default.vue'
 import Sidebar from '@/components/Sidebar.vue'
 
 export default Vue.extend({
   components: {
+    DefaultLayout,
     Sidebar,
   },
 })
