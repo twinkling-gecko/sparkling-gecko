@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
+    "gcp-build": "API_URL=/ nuxt-ts build",
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
     "generate:swagger": "swagger-jsdoc-generator api/swagger.config.js > ./api/swagger.json",
