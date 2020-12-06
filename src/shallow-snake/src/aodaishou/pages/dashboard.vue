@@ -12,7 +12,7 @@
               <span class="badge badge-primary badge-pill">14</span>
             </b-list-group-item>
             <b-list-group-item to="/dashboard/graph"
-              >Usage Graph</b-list-group-item
+              >Statistic Graph</b-list-group-item
             >
             <b-list-group-item to="/dashboard/devices"
               >Devices management</b-list-group-item
@@ -23,8 +23,7 @@
             >
               Promotion
               <span class="badge badge-primary badge-pill">99</span>
-            </b-list-group-item
-            >
+            </b-list-group-item>
             <b-list-group-item to="/dashboard/preferences"
               >Preferences</b-list-group-item
             >
