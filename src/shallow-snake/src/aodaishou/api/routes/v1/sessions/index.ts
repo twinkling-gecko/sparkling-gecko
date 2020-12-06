@@ -41,17 +41,17 @@ router.post(
  *             email: string
  */
 router.get('/me', isAuthenticated, (req, res) => {
-  type PublicUser = {
+  type UserResponse = {
     email: string
   }
   const user: User | undefined = req.user as User
-  const publicUserData: PublicUser = {
+  const userResponse: UserResponse = {
     email: user.email,
   }
 
   if (!user) res.status(404).json({ message: 'no applicable user found' })
 
-  res.status(200).json(publicUserData)
+  res.status(200).json(userResponse)
 })
 
 export default router
