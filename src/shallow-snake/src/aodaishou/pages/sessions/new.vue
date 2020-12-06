@@ -47,7 +47,6 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  middleware: ['authenticated'],
   data() {
     return {
       form: {
@@ -57,6 +56,13 @@ export default Vue.extend({
       error: '',
     }
   },
+  mounted() {
+    setTimeout(() => {
+      if (this.$store.getters.isAuthenticated) {
+        this.$router.push('/dashboard')
+      }
+    }, 0)
+  },
   methods: {
     onSubmit(event: Event) {
       event.preventDefault()
@@ -64,10 +70,9 @@ export default Vue.extend({
       this.$axios
         .post('/api/v1/sessions/new', this.form)
         .then(() => {
-          this.$store.dispatch('fetchUser')
-        })
-        .then(() => {
-          this.$router.push('/')
+          this.$store.dispatch('fetchUser').then(() => {
+            this.$router.push('/dashboard')
+          })
         })
         // FIXME: 失敗したことをユーザーに通知
         .catch((err: Error) => {
