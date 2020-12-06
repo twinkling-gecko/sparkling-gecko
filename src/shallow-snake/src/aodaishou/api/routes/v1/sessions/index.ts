@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { User } from '../../../entity/User'
 import passport from 'passport'
 import '../../../passport'
 import isAuthenticated from '../../../middleware/isAuthenticated'
@@ -40,7 +41,17 @@ router.post(
  *             email: string
  */
 router.get('/me', isAuthenticated, (req, res) => {
-  res.status(200).json(req.user)
+  type PublicUser = {
+    email: string
+  }
+  const user: User | undefined = req.user as User
+  const publicUserData: PublicUser = {
+    email: user.email,
+  }
+
+  if (!user) res.status(404).json({ message: 'no applicable user found' })
+
+  res.status(200).json(publicUserData)
 })
 
 export default router
