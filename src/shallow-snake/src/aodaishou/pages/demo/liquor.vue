@@ -1,6 +1,6 @@
 <template lang="pug">
-GraphContainer
-  Graph
+GraphContainer(title='消費量')
+  Graph(:heigth='600', :width='600')
 </template>
 
 <script lang="ts">

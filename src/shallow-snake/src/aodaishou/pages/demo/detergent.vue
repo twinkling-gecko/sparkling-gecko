@@ -1,6 +1,6 @@
 <template lang="pug">
-  GraphContainer(title="残量")
-    GraphDetergent
+GraphContainer(title='残量')
+  GraphDetergent(:height='600', :width='600')
 </template>
 
 <script lang="ts">
@@ -15,10 +15,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-<style lang="sass" scoped>
-.graph-container
-  margin: 8px
-  max-height: 600px
-  max-width: 600px
-</style>

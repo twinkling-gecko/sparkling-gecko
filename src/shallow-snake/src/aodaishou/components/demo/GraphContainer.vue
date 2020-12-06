@@ -1,7 +1,7 @@
 <template lang="pug">
-  .graph-container
-    h2 {{title}}
-    slot
+.graph-container
+  h2 {{ title }}
+  slot.graph-content
 </template>
 
 <script lang="ts">
@@ -19,7 +19,9 @@ export default Vue.extend({
 
 <style lang="sass" scoped>
 .graph-container
+  max-width: 800px
+  text-align: center
+  padding: 8px
   border: 1px solid #444
   border-radius: 8px
-  width: 600px
 </style>

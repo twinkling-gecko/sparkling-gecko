@@ -12,7 +12,7 @@ export default {
           {
             label: 'Line Dataset',
             data: [600, 569, 520, 455, 444, 400, 369],
-            borderColor: '#CFD8DC',
+            borderColor: '#3498db',
             fill: false,
             type: 'line',
             lineTension: 0.3,
