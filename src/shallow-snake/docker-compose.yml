@@ -8,6 +8,7 @@ services:
     image: twinkling-gecko/aodaishou:development
     volumes:
       - ./src/aodaishou:/usr/src/app
+      - aodaishou_node_modules:/usr/src/app/node_modules
     ports:
       - 3000:3000
     depends_on:
@@ -16,7 +17,7 @@ services:
   nishiki:
     image: mysql:latest
     volumes:
-      - ./.db:/var/lib/mysql:cached
+      - nishiki_db_volume:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=mamushi
       - MYSQL_DATABASE=sparkling
@@ -24,3 +25,7 @@ services:
       - MYSQL_PASSWORD=mamushi
     ports:
       - 3306:3306
+
+volumes:
+  aodaishou_node_modules:
+  nishiki_db_volume:
