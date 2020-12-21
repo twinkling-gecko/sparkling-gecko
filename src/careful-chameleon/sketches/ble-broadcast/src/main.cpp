@@ -24,6 +24,11 @@ void setAdvertisementData(BLEAdvertising *pAdvertising) {
 void setup() {
   M5.begin();
   M5.Power.begin();
+
+  // Suppress noise caused by electronic noise.
+  M5.Speaker.begin();
+  M5.Speaker.mute();
+
   M5.Lcd.println("M5Stack launched.");
 
   BLEDevice::init(DEVICE_NAME);
