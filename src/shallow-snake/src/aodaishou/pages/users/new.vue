@@ -11,8 +11,7 @@
         :onSubmit="onSubmit"
         :onReset="onReset"
         submitText="Signup"
-      >
-      </UserForm>
+      ></UserForm>
       <div class="text-center my-2">
         <p>
           New to Sparkling-Gecko?
@@ -42,13 +41,10 @@ export default Vue.extend({
 
       this.$axios
         .post('/api/v1/users/new', this.form)
-        .then((user) => {
-          console.log(user)
-        })
-        // FIXME: 失敗したことをユーザーに通知
-        .catch((err: Error) => {
-          this.error = err.toString()
-        })
+        .then(() => this.$axios.post('/api/v1/sessions/new', this.form))
+        .then(() => this.$store.dispatch('fetchUser'))
+        .then(() => this.$router.push('/'))
+        .catch((err: Error) => (this.error = err.toString()))
     },
 
     onReset(event: Event) {
