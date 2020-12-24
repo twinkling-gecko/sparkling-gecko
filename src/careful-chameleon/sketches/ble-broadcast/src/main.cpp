@@ -23,16 +23,22 @@ void setOffset() {
   }
 }
 
-uint16_t measureWeight() {
+float measureWeight() {
   if (scale.is_ready()) {
-    long reading = (scale.read() - offset) / DIV;
-    M5.Lcd.println("Measuring... data: " + String(reading));
-    return (uint16_t)reading;
+    float reading = (scale.read() - (float)offset) / DIV;
+    if (reading >= 0) {
+      M5.Lcd.println("Measuring... data: " + String(reading));
+      return reading;
+    } else {
+      return (uint16_t)-1;
+    }
+  } else {
+    return (uint16_t)-1;
   }
 }
 
 void setAdvertisementData(BLEAdvertising *pAdvertising) {
-  uint16_t data = measureWeight();            // User Payload (2byte)
+  uint16_t data = (uint16_t)(measureWeight() * 100);            // User Payload (2byte)
   std::string strData = "";
   strData += (char)0xff;                      // AD Type (Manufacturer Specific Data)
   strData += (char)((data >> 8) & 0xff);      // User Payload High byte
