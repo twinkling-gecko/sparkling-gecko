@@ -59,7 +59,7 @@ export default Vue.extend({
     onReset: {
       type: Function,
       default: () => {
-        return
+        return false
       },
     },
   },
