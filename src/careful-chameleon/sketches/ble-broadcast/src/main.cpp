@@ -30,10 +30,12 @@ float measureWeight() {
       M5.Lcd.println("Measuring... data: " + String(reading));
       return reading;
     } else {
-      return (uint16_t)-1;
+      M5.Lcd.println("Measurement failed! data: " + String(reading));
+      return -1;
     }
   } else {
-    return (uint16_t)-1;
+    M5.Lcd.println("Measurement failed! Scale is not ready.");
+    return -1;
   }
 }
 
