@@ -9,7 +9,7 @@
       <h1>sparkling-gecko</h1>
       <div v-if="isAuthenticated">Welcome Back!</div>
       <div v-else>
-        <b-button size="lg" variant="success">Sign up</b-button>&nbsp;
+        <b-button size="lg" variant="success" to="users/new">Sign up</b-button>&nbsp;
         <b-button size="lg" variant="primary" to="sessions/new">Login</b-button>
       </div>
     </div>
