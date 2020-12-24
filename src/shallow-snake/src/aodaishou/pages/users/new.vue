@@ -5,13 +5,13 @@
       <Logo />
     </div>
     <div class="container my-2" style="max-width: 720px">
-      <UserForm
+      <SignupForm
         :form="form"
         :error="error"
         :on-submit="onSubmit"
         :on-reset="onReset"
         submit-text="Signup"
-      ></UserForm>
+      ></SignupForm>
       <div class="text-center my-2">
         <p>
           New to Sparkling-Gecko?
