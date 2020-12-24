@@ -8,9 +8,9 @@
       <UserForm
         :form="form"
         :error="error"
-        :onSubmit="onSubmit"
-        :onReset="onReset"
-        submitText="Signup"
+        :on-submit="onSubmit"
+        :on-reset="onReset"
+        submit-text="Signup"
       ></UserForm>
       <div class="text-center my-2">
         <p>

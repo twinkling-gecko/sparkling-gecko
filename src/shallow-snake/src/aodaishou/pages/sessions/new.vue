@@ -7,10 +7,10 @@
     <div class="container my-2" style="max-width: 720px">
       <UserForm
         :form="form"
-        submitText="Login"
         :error="error"
-        :onSubmit="onSubmit"
-        :onReset="onReset"
+        :on-submit="onSubmit"
+        :on-reset="onReset"
+        submit-text="Login"
       >
         <div class="text-right">
           <b-link>Forgot password?</b-link>
