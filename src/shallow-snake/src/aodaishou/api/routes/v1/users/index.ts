@@ -46,8 +46,8 @@ router.post('/new', async (req, res) => {
   }
 
   try {
-    const newedUser = await newUser.save()
-    return res.status(200).json({ email: newedUser?.email })
+    await newUser.save()
+    return res.status(200).json({ message: "success" })
   } catch (errors) {
     return res.status(400).json(errors)
   }
