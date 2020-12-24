@@ -7,7 +7,7 @@
     <div class="container my-2" style="max-width: 720px">
       <UserForm
         :form="form"
-        :submitText="Login"
+        submitText="Login"
         :error="error"
         :onSubmit="onSubmit"
         :onReset="onReset"
