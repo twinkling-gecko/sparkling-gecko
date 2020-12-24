@@ -5,7 +5,7 @@
       <Logo />
     </div>
     <div class="container my-2" style="max-width: 720px">
-      <UserForm
+      <LoginForm
         :form="form"
         :error="error"
         :on-submit="onSubmit"
@@ -15,7 +15,7 @@
         <div class="text-right">
           <b-link>Forgot password?</b-link>
         </div>
-      </UserForm>
+      </LoginForm>
       <div class="text-center my-2">
         <p>
           New to Sparkling-Gecko?
