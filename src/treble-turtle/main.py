@@ -19,7 +19,7 @@ class ScanDelegate(DefaultDelegate):
     def handleDiscovery(self, scanEntry, isNewDev, isNewData):
         if scanEntry.getScanData()[0][2] == TARGET_COMPLETE_LOCAL_NAME:
             if isNewDev and isNewData:
-                received_data = int(scanEntry.getScanData()[2][2], 16)
+                received_data = int(scanEntry.getScanData()[2][2], 16) / 100
                 print_scan_data(scanEntry.addr, str(received_data))
 
 
