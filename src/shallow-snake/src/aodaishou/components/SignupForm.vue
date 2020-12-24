@@ -18,7 +18,9 @@
         required
         placeholder="Enter password"
       />
-      <b-form-invalid-feedback :state="isPasswordMatch">The password does not match.</b-form-invalid-feedback>
+      <b-form-invalid-feedback :state="isPasswordMatch"
+        >The password does not match.</b-form-invalid-feedback
+      >
     </b-form-group>
     <b-form-group label="password reconfirmation" label-for="reconfirmation">
       <b-form-input
@@ -28,14 +30,14 @@
         required
         placeholder="Enter password reconfirmation"
       />
-      <b-form-invalid-feedback :state="isPasswordMatch">The password does not match.</b-form-invalid-feedback>
+      <b-form-invalid-feedback :state="isPasswordMatch"
+        >The password does not match.</b-form-invalid-feedback
+      >
       <slot />
     </b-form-group>
     <div class="text-center">
       <b-button type="submit" variant="primary" :disabled="cannotSubmit" block>
-        {{
-        submitText
-        }}
+        {{ submitText }}
       </b-button>
     </div>
   </b-form>
@@ -45,11 +47,6 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  data() {
-    return {
-      reconfirmation: '',
-    }
-  },
   props: {
     submitText: {
       type: String,
@@ -78,6 +75,11 @@ export default Vue.extend({
         return false
       },
     },
+  },
+  data() {
+    return {
+      reconfirmation: '',
+    }
   },
   computed: {
     isPasswordMatch(): boolean {
