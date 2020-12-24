@@ -5,17 +5,13 @@
       <Logo />
     </div>
     <div class="container my-2" style="max-width: 720px">
-      <LoginForm
+      <SignupForm
         :form="form"
         :error="error"
         :on-submit="onSubmit"
         :on-reset="onReset"
-        submit-text="Login"
-      >
-        <div class="text-right">
-          <b-link>Forgot password?</b-link>
-        </div>
-      </LoginForm>
+        submit-text="Signup"
+      ></SignupForm>
       <div class="text-center my-2">
         <p>
           New to Sparkling-Gecko?
@@ -44,17 +40,11 @@ export default Vue.extend({
       event.preventDefault()
 
       this.$axios
-        .post('/api/v1/sessions/new', this.form)
-        .then(() => {
-          this.$store.dispatch('fetchUser')
-        })
-        .then(() => {
-          this.$router.push('/')
-        })
-        // FIXME: 失敗したことをユーザーに通知
-        .catch((err: Error) => {
-          this.error = err.toString()
-        })
+        .post('/api/v1/users/new', this.form)
+        .then(() => this.$axios.post('/api/v1/sessions/new', this.form))
+        .then(() => this.$store.dispatch('fetchUser'))
+        .then(() => this.$router.push('/'))
+        .catch((err: Error) => (this.error = err.toString()))
     },
 
     onReset(event: Event) {
