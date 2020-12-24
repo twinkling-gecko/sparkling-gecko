@@ -38,7 +38,7 @@ router.post('/new', async (req, res) => {
   // ユーザーオブジェクト作成
   let newUser = new User()
   newUser.email = signupBody.email
-  newUser.encrypted_password = await hashFromPlain(signupBody.password)
+  newUser.encrypted_password = await toHashFromPlain(signupBody.password)
 
   errors = await validate(newUser)
   if (errors.length > 0) {
@@ -53,7 +53,7 @@ router.post('/new', async (req, res) => {
   }
 })
 
-const hashFromPlain = async (plain: string): Promise<string> => {
+const toHashFromPlain = async (plain: string): Promise<string> => {
   return await bcrypt.hash(plain, 10)
 }
 
