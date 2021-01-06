@@ -10,6 +10,7 @@
         :error="error"
         :on-submit="onSubmit"
         :on-reset="onReset"
+        :validate-message="validateMessage"
         submit-text="Signup"
       ></SignupForm>
       <div class="text-center my-2">
@@ -33,6 +34,7 @@ export default Vue.extend({
         password: '',
       },
       error: '',
+      validateMessage: [],
     }
   },
   methods: {
@@ -44,9 +46,15 @@ export default Vue.extend({
         .then(() => this.$axios.post('/api/v1/sessions/new', this.form))
         .then(() => this.$store.dispatch('fetchUser'))
         .then(() => this.$router.push('/'))
-        .catch((err: Error) => (this.error = err.toString()))
+        .catch((err) => {
+          if (err.response.data.validateError) {
+            this.validateMessage = err.response.data
+            this.error = "invalid property"
+          } else {
+            this.error = err.response.data.message
+          }
+        })
     },
-
     onReset(event: Event) {
       event.preventDefault()
 
