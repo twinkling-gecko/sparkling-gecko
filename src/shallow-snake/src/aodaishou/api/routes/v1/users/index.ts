@@ -26,7 +26,7 @@ router.post('/new', async (req, res) => {
 
   let errors = await validate(signupBody)
   if (errors.length > 0) {
-    return res.status(400).json(errors)
+    return res.status(400).json({ validateError: errors })
   }
 
   // emailの重複確認
@@ -47,7 +47,7 @@ router.post('/new', async (req, res) => {
 
   try {
     await newUser.save()
-    return res.status(200).json({ message: "success" })
+    return res.status(200).json({ message: 'success' })
   } catch (errors) {
     return res.status(400).json(errors)
   }
