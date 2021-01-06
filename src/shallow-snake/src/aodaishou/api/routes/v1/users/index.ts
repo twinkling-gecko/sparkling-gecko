@@ -26,8 +26,7 @@ router.post('/new', async (req, res) => {
 
   const errors = await validate(signupBody)
   if (errors.length > 0) {
-    // TODO: バリデーションエラー時の詳細なメッセージ表示
-    return res.status(400).json(errors)
+    return res.status(400).json({ validateError: errors })
   }
 
   // emailの重複確認
