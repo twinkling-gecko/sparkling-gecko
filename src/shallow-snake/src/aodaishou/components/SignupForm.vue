@@ -109,7 +109,7 @@ export default Vue.extend({
       reconfirmation: '',
     }
   },
- computed: {
+  computed: {
     isPasswordMatch(): boolean {
       // passwordとreconfirmationが一致する場合 or 空文字 => true
       return (
