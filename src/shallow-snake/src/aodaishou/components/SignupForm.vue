@@ -33,7 +33,7 @@
         >
           {{ propertiesValidate }}
         </div>
-     </b-form-invalid-feedback>
+      </b-form-invalid-feedback>
     </b-form-group>
     <b-form-group label="password reconfirmation" label-for="reconfirmation">
       <b-form-input
@@ -43,7 +43,9 @@
         required
         placeholder="Enter password reconfirmation"
       />
-      <b-form-invalid-feedback :state="isPasswordMatch">The password does not match.</b-form-invalid-feedback>
+      <b-form-invalid-feedback :state="isPasswordMatch"
+        >The password does not match.</b-form-invalid-feedback
+      >
       <slot />
     </b-form-group>
     <div class="text-center">
@@ -54,7 +56,7 @@
         block
         >{{ submitText }}</b-button
       >
-   </div>
+    </div>
   </b-form>
 </template>
 
@@ -87,7 +89,7 @@ export default Vue.extend({
     },
     validateError: {
       type: Array as PropType<PropertyValidateError[]>,
-     default: () => [{ property: '', constraints: {} }],
+      default: () => [{ property: '', constraints: {} }],
     },
     onSubmit: {
       type: Function,
