@@ -44,13 +44,13 @@ export default Vue.extend({
       this.$axios
         .post('/api/v1/users/new', this.form)
         .then(() => this.$axios.post('/api/v1/sessions/new', this.form))
+        .then(() => this.onReset(event))
         .then(() => this.$store.dispatch('fetchUser'))
         .then(() => this.$router.push('/'))
         .catch((err) => {
           if (err.response.data.validateError) {
-            console.log(err.response.data)
             this.validateError = err.response.data.validateError
-            this.error = "invalid property"
+            this.error = 'invalid property'
           } else {
             this.error = err.response.data.message
           }
