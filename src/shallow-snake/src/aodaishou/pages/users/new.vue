@@ -10,7 +10,7 @@
         :error="error"
         :on-submit="onSubmit"
         :on-reset="onReset"
-        :validate-message="validateMessage"
+        :validate-error="validateError"
         submit-text="Signup"
       ></SignupForm>
       <div class="text-center my-2">
@@ -34,7 +34,7 @@ export default Vue.extend({
         password: '',
       },
       error: '',
-      validateMessage: [],
+      validateError: [],
     }
   },
   methods: {
@@ -48,7 +48,8 @@ export default Vue.extend({
         .then(() => this.$router.push('/'))
         .catch((err) => {
           if (err.response.data.validateError) {
-            this.validateMessage = err.response.data
+            console.log(err.response.data)
+            this.validateError = err.response.data.validateError
             this.error = "invalid property"
           } else {
             this.error = err.response.data.message
