@@ -10,7 +10,9 @@
         placeholder="Enter email"
       />
       <b-form-invalid-feedback :state="!emailValidates">
-        <div v-for="propertiesValidate in emailValidates">{{ propertiesValidate }}</div>
+        <div v-for="(propertiesValidate, index) in emailValidates" :key="index">
+          {{ propertiesValidate }}
+        </div>
       </b-form-invalid-feedback>
     </b-form-group>
     <b-form-group label="password" label-for="password">
@@ -21,9 +23,16 @@
         required
         placeholder="Enter password"
       />
-      <b-form-invalid-feedback :state="isPasswordMatch">The password does not match.</b-form-invalid-feedback>
+      <b-form-invalid-feedback :state="isPasswordMatch"
+        >The password does not match.</b-form-invalid-feedback
+      >
       <b-form-invalid-feedback :state="!passwordValidates">
-        <div v-for="propertiesValidate in passwordValidates">{{ propertiesValidate }}</div>
+        <div
+          v-for="(propertiesValidate, index) in passwordValidates"
+          :key="index"
+        >
+          {{ propertiesValidate }}
+        </div>
       </b-form-invalid-feedback>
     </b-form-group>
     <b-form-group label="password reconfirmation" label-for="reconfirmation">
@@ -34,11 +43,19 @@
         required
         placeholder="Enter password reconfirmation"
       />
-      <b-form-invalid-feedback :state="isPasswordMatch">The password does not match.</b-form-invalid-feedback>
+      <b-form-invalid-feedback :state="isPasswordMatch"
+        >The password does not match.</b-form-invalid-feedback
+      >
       <slot />
     </b-form-group>
     <div class="text-center">
-      <b-button type="submit" variant="primary" :disabled="cannotSubmit" block>{{ submitText }}</b-button>
+      <b-button
+        type="submit"
+        variant="primary"
+        :disabled="cannotSubmit"
+        block
+        >{{ submitText }}</b-button
+      >
     </div>
   </b-form>
 </template>
@@ -92,20 +109,6 @@ export default Vue.extend({
       reconfirmation: '',
     }
   },
-  methods: {
-    getPropValidateErrors(
-      propertyName: string,
-      validateError: PropertyValidateError[]
-    ): String[] | undefined {
-      for (const propValidateError of validateError) {
-        if (propValidateError.property === propertyName) {
-          return Object.entries(propValidateError.constraints).map(
-            ([key, value]): String => value as String
-          )
-        }
-      }
-    },
-  },
   computed: {
     isPasswordMatch(): boolean {
       // passwordとreconfirmationが一致する場合 or 空文字 => true
@@ -125,6 +128,20 @@ export default Vue.extend({
     },
     passwordValidates(): String[] | undefined {
       return this.getPropValidateErrors('password', this.validateError)
+    },
+  },
+  methods: {
+    getPropValidateErrors(
+      propertyName: string,
+      validateError: PropertyValidateError[]
+    ): String[] | undefined {
+      for (const propValidateError of validateError) {
+        if (propValidateError.property === propertyName) {
+          return Object.entries(propValidateError.constraints).map(
+            ([_, value]): String => value as String
+          )
+        }
+      }
     },
   },
 })
