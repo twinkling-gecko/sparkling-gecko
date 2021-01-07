@@ -8,15 +8,10 @@ const router = Router()
 
 /**
  * @swagger
- * /api/v1/sessions/me:
- *   get:
+ * /api/v1/users/new:
+ *   post:
  *     tags: [v1]
- *     description: user description
- *     responses:
- *       200:
- *         examples:
- *           result:
- *             email: string
+ *     description: user signup
  */
 router.post('/new', async (req, res) => {
   // リクエストの確認
