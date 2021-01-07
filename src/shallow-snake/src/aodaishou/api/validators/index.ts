@@ -10,7 +10,7 @@ export class SignupBody {
   @MinLength(8)
   @Matches(/^(?=.*?\d)(?=.*?[a-z])(?=.*?[A-Z])[a-zA-Z\d]*$/, {
     message:
-      'Please use one or more single-byte uppercase letters and uppercase letters.',
+      'password must use one or more single-byte uppercase letters and uppercase letters.',
   })
   password: string
 }
