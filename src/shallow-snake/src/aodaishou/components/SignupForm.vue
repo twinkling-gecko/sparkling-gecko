@@ -70,7 +70,7 @@ export default Vue.extend({
       type: String,
       default: '',
     },
-    validateMessage: {
+    validateError: {
       type: Array as PropType<PropertyError[]>,
       default: () => [{ property: '', constraints: {} }],
     },
@@ -95,9 +95,9 @@ export default Vue.extend({
   methods: {
     getPropertyValidates(
       propertyName: string,
-      validateMessage: PropertyError[]
+      validateError: PropertyError[]
     ): String[] | undefined {
-      for (const propertyError of validateMessage) {
+      for (const propertyError of validateError) {
         if (propertyError.property === propertyName) {
           return Object.entries(propertyError.constraints).map(
             ([key, value]): String => value as String
@@ -121,10 +121,10 @@ export default Vue.extend({
       )
     },
     emailValidates(): String[] | undefined {
-      return this.getPropertyValidates('email', this.validateMessage)
+      return this.getPropertyValidates('email', this.validateError)
     },
     passwordValidates(): String[] | undefined {
-      return this.getPropertyValidates('password', this.validateMessage)
+      return this.getPropertyValidates('password', this.validateError)
     },
   },
 })
