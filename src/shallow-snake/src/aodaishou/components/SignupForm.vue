@@ -46,7 +46,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue'
 
-type PropertyError = {
+type PropertyValidateError = {
   property: String
   constraints: {
     [type: string]: String
@@ -71,7 +71,7 @@ export default Vue.extend({
       default: '',
     },
     validateError: {
-      type: Array as PropType<PropertyError[]>,
+      type: Array as PropType<PropertyValidateError[]>,
       default: () => [{ property: '', constraints: {} }],
     },
     onSubmit: {
@@ -93,13 +93,13 @@ export default Vue.extend({
     }
   },
   methods: {
-    getPropertyValidates(
+    getPropValidateErrors(
       propertyName: string,
-      validateError: PropertyError[]
+      validateError: PropertyValidateError[]
     ): String[] | undefined {
-      for (const propertyError of validateError) {
-        if (propertyError.property === propertyName) {
-          return Object.entries(propertyError.constraints).map(
+      for (const propValidateError of validateError) {
+        if (propValidateError.property === propertyName) {
+          return Object.entries(propValidateError.constraints).map(
             ([key, value]): String => value as String
           )
         }
@@ -121,10 +121,10 @@ export default Vue.extend({
       )
     },
     emailValidates(): String[] | undefined {
-      return this.getPropertyValidates('email', this.validateError)
+      return this.getPropValidateErrors('email', this.validateError)
     },
     passwordValidates(): String[] | undefined {
-      return this.getPropertyValidates('password', this.validateError)
+      return this.getPropValidateErrors('password', this.validateError)
     },
   },
 })
