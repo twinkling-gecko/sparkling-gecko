@@ -9,7 +9,7 @@ import {
   OneToMany,
 } from 'typeorm'
 import { IsEmail } from 'class-validator'
-import { Item } from './Item'
+import { Item } from './'
 
 @Entity('users')
 export class User extends BaseEntity {

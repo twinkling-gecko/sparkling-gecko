@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 
-import { Item } from './Item'
+import { Item } from './'
 
 @Entity('itemValues')
 export class ItemValue extends BaseEntity {
