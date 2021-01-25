@@ -9,8 +9,7 @@ import {
   OneToMany
 } from 'typeorm'
 
-import { User } from './User'
-import { ItemValue } from './ItemValue'
+import { User, ItemValue } from './'
 
 @Entity('items')
 export class Item extends BaseEntity {
