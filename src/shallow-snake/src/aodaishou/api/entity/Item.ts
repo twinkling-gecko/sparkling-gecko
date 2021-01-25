@@ -5,23 +5,24 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  DeleteDateColumn,
-  OneToMany,
+  ManyToOne,
 } from 'typeorm'
-import { IsEmail } from 'class-validator'
-import { Item } from './Item'
 
-@Entity('users')
-export class User extends BaseEntity {
+import { User } from './User'
+
+@Entity('items')
+export class Item extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column('text')
-  @IsEmail()
-  email: string
+  @Column('varchar')
+  name: string
 
-  @Column('text')
-  encrypted_password: string
+  @Column({ type: 'varchar', name: 'image_url' })
+  imageUrl: string
+
+  @Column({ type: 'varchar', name: 'graph_type' })
+  graphType: string
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -39,15 +40,6 @@ export class User extends BaseEntity {
   })
   updatedAt: Date
 
-  @DeleteDateColumn({
-    type: 'timestamp',
-    name: 'deleted_at',
-    precision: 0,
-    nullable: true,
-    default: null,
-  })
-  deletedAt: Date
-
-  @OneToMany(() => Item, item => item.user)
-  items: Item[]
+  @ManyToOne(() => User, user => user.items)
+  user: User
 }
