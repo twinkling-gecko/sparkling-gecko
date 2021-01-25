@@ -4,27 +4,22 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
   ManyToOne,
-  OneToMany
+  UpdateDateColumn,
 } from 'typeorm'
 
-import { User } from './User'
-import { ItemValue } from './ItemValue'
+import { Item } from './Item'
 
-@Entity('items')
-export class Item extends BaseEntity {
+@Entity('itemValues')
+export class ItemValue extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
   @Column('varchar')
-  name: string
+  value: string
 
-  @Column({ type: 'varchar', name: 'image_url' })
-  imageUrl: string
-
-  @Column({ type: 'varchar', name: 'graph_type' })
-  graphType: string
+  @Column({ type: 'timestamp', precision: 0, name: 'observated_time' })
+  observatedTime: Date
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -42,9 +37,6 @@ export class Item extends BaseEntity {
   })
   updatedAt: Date
 
-  @ManyToOne(() => User, user => user.items)
-  user: User
-
-  @OneToMany(() => ItemValue, itemValue => itemValue.item)
-  itemValues: ItemValue[]
+  @ManyToOne(() => Item, (item) => item.itemValues)
+  item: Item
 }
