@@ -5,23 +5,17 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
   OneToMany,
 } from 'typeorm'
+import { Item } from './'
 
-import { User, ItemValue, GraphType } from './'
-
-@Entity('items')
-export class Item extends BaseEntity {
+@Entity('graph_types')
+export class GraphType extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
   @Column('varchar')
   name: string
-
-  @Column({ type: 'varchar', name: 'image_url' })
-  imageUrl: string
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -39,14 +33,6 @@ export class Item extends BaseEntity {
   })
   updatedAt: Date
 
-  @ManyToOne(() => User, (user) => user.items)
-  @JoinColumn({ name: 'user_id' })
-  user: User
-
-  @ManyToOne(() => GraphType, (graphType) => graphType.items)
-  @JoinColumn({ name: 'graph_type_id' })
-  graphType: GraphType
-
-  @OneToMany(() => ItemValue, (itemValue) => itemValue.item)
-  itemValues: ItemValue[]
+  @OneToMany(() => Item, item => item.graphType)
+  items: Item[]
 }
