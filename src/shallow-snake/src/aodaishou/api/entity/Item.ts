@@ -6,7 +6,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  OneToMany
+  JoinColumn,
+  OneToMany,
 } from 'typeorm'
 
 import { User, ItemValue } from './'
@@ -21,9 +22,6 @@ export class Item extends BaseEntity {
 
   @Column({ type: 'varchar', name: 'image_url' })
   imageUrl: string
-
-  @Column({ type: 'varchar', name: 'graph_type' })
-  graphType: string
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -41,9 +39,10 @@ export class Item extends BaseEntity {
   })
   updatedAt: Date
 
-  @ManyToOne(() => User, user => user.items)
+  @ManyToOne(() => User, (user) => user.items)
+  @JoinColumn({ name: 'user_id' })
   user: User
 
-  @OneToMany(() => ItemValue, itemValue => itemValue.item)
+  @OneToMany(() => ItemValue, (itemValue) => itemValue.item)
   itemValues: ItemValue[]
 }
