@@ -6,11 +6,12 @@ import {
   CreateDateColumn,
   ManyToOne,
   UpdateDateColumn,
+  JoinColumn
 } from 'typeorm'
 
 import { Item } from './'
 
-@Entity('itemValues')
+@Entity('item_values')
 export class ItemValue extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
@@ -18,8 +19,8 @@ export class ItemValue extends BaseEntity {
   @Column('varchar')
   value: string
 
-  @Column({ type: 'timestamp', precision: 0, name: 'observated_time' })
-  observatedTime: Date
+  @Column({ type: 'timestamp', precision: 0, name: 'observated_at' })
+  observatedAt: Date
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -38,5 +39,6 @@ export class ItemValue extends BaseEntity {
   updatedAt: Date
 
   @ManyToOne(() => Item, (item) => item.itemValues)
+  @JoinColumn({ name: 'item_id'})
   item: Item
 }
