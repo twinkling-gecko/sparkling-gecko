@@ -1,4 +1,4 @@
-import { IsEmail, IsString, MinLength, Matches } from 'class-validator'
+import { IsEmail, IsString, MinLength, Matches, IsUrl } from 'class-validator'
 
 export class SignupBody {
   @IsEmail()
@@ -13,4 +13,12 @@ export class SignupBody {
       'Please use one or more single-byte uppercase letters and uppercase letters.',
   })
   password: string
+}
+
+export class ItemBody {
+  @IsString()
+  name: string
+
+  @IsUrl()
+  image_url: string
 }
