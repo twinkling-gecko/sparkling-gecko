@@ -1,7 +1,7 @@
 import passport from 'passport'
-import { User } from './entity/User'
-import { Strategy as LocalStrategy } from 'passport-local'
 import bcrypt from 'bcrypt'
+import { Strategy as LocalStrategy } from 'passport-local'
+import { User } from './entity/User'
 
 passport.use(
   new LocalStrategy(
