@@ -42,7 +42,7 @@ passport.use(
     }
 
     if (user) {
-      return done(null, { id: user.id, email: user.email })
+      return done(null, user)
     } else {
       return done(null, false)
     }
