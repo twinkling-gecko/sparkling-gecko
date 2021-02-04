@@ -19,8 +19,8 @@ export class ItemValue extends BaseEntity {
   @Column('varchar')
   value: string
 
-  @Column({ type: 'timestamp', precision: 0, name: 'observated_at' })
-  observatedAt: Date
+  @Column({ type: 'timestamp', precision: 0, name: 'observed_at' })
+  observedAt: Date
 
   @CreateDateColumn({
     type: 'timestamp',
