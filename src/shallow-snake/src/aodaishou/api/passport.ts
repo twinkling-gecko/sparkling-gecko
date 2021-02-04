@@ -1,6 +1,7 @@
 import passport from 'passport'
 import bcrypt from 'bcrypt'
 import { Strategy as LocalStrategy } from 'passport-local'
+import { Strategy as BearerStrategy } from 'passport-http-bearer'
 import { User } from './entity/User'
 
 passport.use(
@@ -29,6 +30,23 @@ passport.use(
       }
     }
   )
+)
+
+passport.use(
+  new BearerStrategy(async (token, done) => {
+    let user: User | undefined
+    try {
+      user = await User.findOne({ token })
+    } catch (err) {
+      return done(err, false)
+    }
+
+    if (user) {
+      return done(null, { id: user.id, email: user.email })
+    } else {
+      return done(null, false)
+    }
+  })
 )
 
 passport.serializeUser(function (user: User, done) {
