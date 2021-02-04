@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import bcrypt from 'bcrypt'
 import { validate } from 'class-validator'
 import { User } from '../../../entity/User'
 import { SignupBody } from '../../../validators'
+import { UsersHandler } from '../../../handler/users_handler'
 
 const router = Router()
 
@@ -24,8 +24,9 @@ router.post('/new', async (req, res) => {
   signupBody.email = req.body.email
   signupBody.password = req.body.password
 
-  let errors = await validate(signupBody)
+  const errors = await validate(signupBody)
   if (errors.length > 0) {
+    // TODO: バリデーションエラー時の詳細なメッセージ表示
     return res.status(400).json(errors)
   }
 
@@ -35,26 +36,13 @@ router.post('/new', async (req, res) => {
     return res.status(400).json({ message: 'This email is already exist' })
   }
 
-  // ユーザーオブジェクト作成
-  const newUser = new User()
-  newUser.email = signupBody.email
-  newUser.encrypted_password = await toHashFromPlain(signupBody.password)
-
-  errors = await validate(newUser)
-  if (errors.length > 0) {
-    return res.status(400).json(errors)
-  }
-
   try {
-    await newUser.save()
+    await UsersHandler.createUser(signupBody.email, signupBody.password)
     return res.status(200).json({ message: 'success' })
-  } catch (errors) {
-    return res.status(400).json(errors)
+  } catch (err) {
+    // 例外発生時の詳細なメッセージ表示
+    return res.status(400).json({ message: err })
   }
 })
-
-const toHashFromPlain = async (plain: string): Promise<string> => {
-  return await bcrypt.hash(plain, 10)
-}
 
 export default router
