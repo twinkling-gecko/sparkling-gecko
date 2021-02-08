@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { User } from '../../../entity/User'
 import passport from 'passport'
+import { User } from '../../../entity/User'
 import '../../../passport'
 import isAuthenticated from '../../../middleware/isAuthenticated'
 

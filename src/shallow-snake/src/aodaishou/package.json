@@ -10,13 +10,18 @@
     "generate": "nuxt-ts generate",
     "generate:swagger": "swagger-jsdoc-generator api/swagger.config.js > ./api/swagger.json",
     "typeorm": "ts-node ./node_modules/.bin/typeorm --config ormconfig.ts",
-    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint:js": "eslint --ext .js,.ts,.vue .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "lint": "yarn lint:js && yarn lint:style",
     "test": "jest"
   },
+  "eslintIgnore": [
+    ".git/",
+    "node_modules/",
+    "api/migration/"
+  ],
   "lint-staged": {
-    "*.{js,vue}": "eslint",
+    "*.{js,ts,vue}": "eslint",
     "*.{css,vue}": "stylelint"
   },
   "dependencies": {
