@@ -20,5 +20,5 @@ export class ItemBody {
   name: string
 
   @IsUrl()
-  image_url: string
+  imageUrl: string
 }

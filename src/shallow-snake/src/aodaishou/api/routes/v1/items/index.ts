@@ -1,7 +1,7 @@
 import { Router, Request } from 'express'
+import { validate } from 'class-validator'
 import { ItemBody } from '../../../validators'
 import '../../../passport'
-import { validate } from 'class-validator'
 import isAuthenticated from '../../../middleware/isAuthenticated'
 import { Item, User } from '../../../entity'
 
@@ -23,7 +23,7 @@ router.post('/new', isAuthenticated, async (req: Request, res) => {
   const user = req.user as User
   const itemBody = new ItemBody()
   itemBody.name = req.body.name
-  itemBody.image_url = req.body.image_url
+  itemBody.imageUrl = req.body.image_url
 
   let errors = await validate(itemBody)
   if (errors.length > 0)
@@ -38,7 +38,7 @@ router.post('/new', isAuthenticated, async (req: Request, res) => {
   newItem.user = user
 
   errors = await validate(newItem)
-  if (errors.length > 0) return res.status(400).json({errors})
+  if (errors.length > 0) return res.status(400).json({ errors })
 
   try {
     newItem.save()
