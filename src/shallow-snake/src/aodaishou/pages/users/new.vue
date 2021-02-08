@@ -48,11 +48,11 @@ export default Vue.extend({
         .then(() => this.$store.dispatch('fetchUser'))
         .then(() => this.$router.push('/'))
         .catch((err) => {
+          this.error = err.response.data.errorMessage
           if (err.response.data.validateError) {
             this.validateError = err.response.data.validateError
-            this.error = 'invalid property'
           } else {
-            this.error = err.response.data.message
+            this.validateError = []
           }
         })
     },
