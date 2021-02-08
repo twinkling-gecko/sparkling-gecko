@@ -48,6 +48,6 @@ export class User extends BaseEntity {
   })
   deletedAt: Date
 
-  @OneToMany(() => Item, item => item.user)
+  @OneToMany(() => Item, (item) => item.user)
   items: Item[]
 }

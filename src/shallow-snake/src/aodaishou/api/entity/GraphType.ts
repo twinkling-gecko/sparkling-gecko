@@ -33,6 +33,6 @@ export class GraphType extends BaseEntity {
   })
   updatedAt: Date
 
-  @OneToMany(() => Item, item => item.graphType)
+  @OneToMany(() => Item, (item) => item.graphType)
   items: Item[]
 }
