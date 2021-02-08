@@ -19,7 +19,7 @@
       <div class="text-center my-2">
         <p>
           New to Sparkling-Gecko?
-          <b-link>Create account.</b-link>
+          <b-link to="/users/new">Create account.</b-link>
         </p>
       </div>
     </div>
