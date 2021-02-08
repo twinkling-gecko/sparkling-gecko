@@ -4,24 +4,23 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  ManyToOne,
   UpdateDateColumn,
-  DeleteDateColumn,
-  OneToMany,
+  JoinColumn,
 } from 'typeorm'
-import { IsEmail } from 'class-validator'
+
 import { Item } from './'
 
-@Entity('users')
-export class User extends BaseEntity {
+@Entity('item_values')
+export class ItemValue extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column('text')
-  @IsEmail()
-  email: string
+  @Column('varchar')
+  value: string
 
-  @Column('text')
-  encrypted_password: string
+  @Column({ type: 'timestamp', precision: 0, name: 'observed_at' })
+  observedAt: Date
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -39,15 +38,7 @@ export class User extends BaseEntity {
   })
   updatedAt: Date
 
-  @DeleteDateColumn({
-    type: 'timestamp',
-    name: 'deleted_at',
-    precision: 0,
-    nullable: true,
-    default: null,
-  })
-  deletedAt: Date
-
-  @OneToMany(() => Item, (item) => item.user)
-  items: Item[]
+  @ManyToOne(() => Item, (item) => item.itemValues)
+  @JoinColumn({ name: 'item_id' })
+  item: Item
 }
