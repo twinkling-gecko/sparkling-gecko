@@ -23,6 +23,9 @@ export class User extends BaseEntity {
   @Column('text')
   encrypted_password: string
 
+  @Column('text')
+  token: string
+
   @CreateDateColumn({
     type: 'timestamp',
     name: 'created_at',
