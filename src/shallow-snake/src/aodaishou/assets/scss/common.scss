@@ -1,1 +1,15 @@
 @import 'bootswatch/dist/flatly/bootstrap.min.css';
+
+.layout-enter-active,
+.layout-leave-active,
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.layout-enter ,
+.layout-leave ,
+.page-enter ,
+.page-leave {
+  opacity: 0;
+}
