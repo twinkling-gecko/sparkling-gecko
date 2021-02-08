@@ -20,23 +20,25 @@ const router = Router()
  *             message: string
  */
 router.post('/new', isAuthenticated, async (req: Request, res) => {
-  console.log(req.user)
   const user = req.user as User
-  let itemBody = new ItemBody()
+  const itemBody = new ItemBody()
   itemBody.name = req.body.name
   itemBody.image_url = req.body.image_url
 
   let errors = await validate(itemBody)
-  if (errors.length > 0) return res.status(400).json(errors)
+  if (errors.length > 0)
+    return res
+      .status(400)
+      .json({ message: 'Invalid params', validateError: errors })
 
   // TODO: fix name
-  let newItem = new Item()
+  const newItem = new Item()
   newItem.name = itemBody.name
   newItem.imageUrl = itemBody.image_url
   newItem.user = user
 
   errors = await validate(newItem)
-  if (errors.length > 0) return res.status(400).json(errors)
+  if (errors.length > 0) return res.status(400).json({errors})
 
   try {
     newItem.save()

@@ -22,7 +22,7 @@ export default Vue.extend({
       this.$axios
         .post('/api/v1/items/new', this.form)
         .then(() => this.$router.push('/items'))
-        .catch((err: Error) => console.log(err))
+        .catch(() => {})
     },
     onReset(event: Event) {
       event.preventDefault()

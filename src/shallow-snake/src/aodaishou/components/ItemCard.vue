@@ -1,6 +1,11 @@
 <template>
   <div>
-    <b-card :title="item.name" :img-src="item.imageUrl" img-alt="Item image" img-top>
+    <b-card
+      :title="item.name"
+      :img-src="item.imageUrl"
+      img-alt="Item image"
+      img-top
+    >
       <b-button href="/items" variant="primary">view</b-button>
     </b-card>
   </div>

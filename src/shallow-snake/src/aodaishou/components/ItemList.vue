@@ -1,6 +1,6 @@
 <template>
   <div class="m-2">
-    <div v-for="item in items" class="card-container mx-2">
+    <div v-for="item in items" :key="item.id" class="card-container mx-2">
       <ItemCard :item="item" />
     </div>
   </div>
@@ -10,8 +10,10 @@
 import Vue from 'vue'
 export default Vue.extend({
   props: {
-    items: Array,
-    default: () => [],
+    items: {
+      type: Array,
+      default: () => [],
+    },
   },
 })
 </script>
