@@ -3,6 +3,6 @@ import { Context } from '@nuxt/types'
 
 export default ({ store }: Context) => {
   createPersistedState({
-    key: 'sparkling'
+    key: 'sparkling',
   })(store)
 }

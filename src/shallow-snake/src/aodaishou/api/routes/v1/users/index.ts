@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { User } from '../../../entity/User'
-import { SignupBody } from '../../../validators'
 import { validate } from 'class-validator'
 import bcrypt from 'bcrypt'
+import { User } from '../../../entity/User'
+import { SignupBody } from '../../../validators'
 
 const router = Router()
 
@@ -20,7 +20,7 @@ const router = Router()
  */
 router.post('/new', async (req, res) => {
   // リクエストの確認
-  let signupBody = new SignupBody()
+  const signupBody = new SignupBody()
   signupBody.email = req.body.email
   signupBody.password = req.body.password
 
@@ -36,7 +36,7 @@ router.post('/new', async (req, res) => {
   }
 
   // ユーザーオブジェクト作成
-  let newUser = new User()
+  const newUser = new User()
   newUser.email = signupBody.email
   newUser.encrypted_password = await toHashFromPlain(signupBody.password)
 
@@ -47,7 +47,7 @@ router.post('/new', async (req, res) => {
 
   try {
     await newUser.save()
-    return res.status(200).json({ message: "success" })
+    return res.status(200).json({ message: 'success' })
   } catch (errors) {
     return res.status(400).json(errors)
   }

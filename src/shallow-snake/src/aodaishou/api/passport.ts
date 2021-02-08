@@ -1,7 +1,7 @@
 import passport from 'passport'
-import { User } from './entity/User'
 import { Strategy as LocalStrategy } from 'passport-local'
 import bcrypt from 'bcrypt'
+import { User } from './entity/User'
 
 passport.use(
   new LocalStrategy(
@@ -9,7 +9,7 @@ passport.use(
     async (email, password, done) => {
       let user: User | undefined
       try {
-        user = await User.findOne({ email: email })
+        user = await User.findOne({ email })
       } catch (err) {
         return done(err, false, {
           message: 'failed to fetch data from the database',
@@ -37,7 +37,7 @@ passport.serializeUser(function (user: User, done) {
 
 passport.deserializeUser(async function (id: number, done) {
   try {
-    const user: User | undefined = await User.findOne({ id: id })
+    const user: User | undefined = await User.findOne({ id })
     done(null, user)
   } catch (err) {
     done(err, false)
