@@ -13,7 +13,7 @@ passport.use(
         user = await User.findOne({ email })
       } catch (err) {
         return done(err, false, {
-          message: 'failed to fetch data from the database',
+          message: 'Failed to fetch data from the database',
         })
       }
 
@@ -26,7 +26,7 @@ passport.use(
         return done(null, { id: user?.id, email: user?.email })
       } else {
         // emailに合致するuserが存在しないかpasswordが合致しない場合
-        return done(null, false, { message: 'invalid email or password' })
+        return done(null, false, { message: 'Invalid email or password' })
       }
     }
   )
