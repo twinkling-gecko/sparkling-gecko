@@ -52,8 +52,8 @@ export default Vue.extend({
           this.$router.push('/')
         })
         // FIXME: 失敗したことをユーザーに通知
-        .catch((err: Error) => {
-          this.error = err.toString()
+        .catch((err) => {
+          this.error = err.response.data.message
         })
     },
 
