@@ -32,7 +32,7 @@ router.post('/new', (req, res) => {
       } else {
         res.status(400).json({ message: info.message })
       }
-   }
+    }
   )(req, res)
 })
 
