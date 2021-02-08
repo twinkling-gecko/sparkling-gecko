@@ -7,7 +7,12 @@
     <div>
       <Logo />
       <h1>sparkling-gecko</h1>
-      <div v-if="isAuthenticated">Welcome Back!</div>
+      <div v-if="isAuthenticated">
+        <p>
+          Welcome Back!
+        </p>
+        <b-button @click="logout" size="lg" variant="success">Logout</b-button>
+      </div>
       <div v-else>
         <b-button size="lg" variant="success" to="users/new">Sign up</b-button
         >&nbsp;
@@ -42,6 +47,12 @@ export default Vue.extend({
   methods: {
     handleResize() {
       this.height = window.innerHeight
+    },
+    logout() {
+      this.$axios.delete('/api/users').then((res) => {
+        this.$store.commit('logout')
+        this.$router.push('/sessions/new')
+      });
     },
   },
 })

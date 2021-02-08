@@ -28,6 +28,15 @@ router.post(
   }
 )
 
+router.delete(
+  '/',
+  passport.authenticate('local'),
+  (req, res) => {
+    req.logout()
+    res.status(200).json({ message: 'success' })
+  }
+)
+
 /**
  * @swagger
  * /api/v1/sessions/me:
