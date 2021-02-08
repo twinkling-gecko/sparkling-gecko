@@ -11,7 +11,7 @@ export namespace UsersHandler {
     const user = new User()
 
     user.email = email
-    user.encrypted_password = encryptPassword(password)
+    user.encryptedPassword = encryptPassword(password)
     user.token = generateToken()
 
     const errors = await validate(user)
