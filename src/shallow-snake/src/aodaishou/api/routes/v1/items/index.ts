@@ -34,7 +34,7 @@ router.post('/new', isAuthenticated, async (req: Request, res) => {
   // TODO: fix name
   const newItem = new Item()
   newItem.name = itemBody.name
-  newItem.imageUrl = itemBody.image_url
+  newItem.imageUrl = itemBody.imageUrl
   newItem.user = user
 
   errors = await validate(newItem)
