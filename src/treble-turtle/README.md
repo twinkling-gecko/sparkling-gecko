@@ -23,5 +23,9 @@ $ pip install -r requirements.txt
 ```
 
 ```
+# set -x SS_TOKEN = hoge
+```
+
+```
 # ./main.py
 ```
