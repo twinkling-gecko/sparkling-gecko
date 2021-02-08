@@ -12,29 +12,45 @@ const int ADVERTISING_TIME = 3;               // Advertising time length (sec)
 const int LOADCELL_DOUT_PIN = 2;
 const int LOADCELL_SCK_PIN = 3;
 const long DIV = 476;                         // TODO Calibration
+const int ROUND = 30;                         // Number of repeated measurements to improve measurement accuracy
 
 HX711 scale;
 RTC_DATA_ATTR long offset = 0;                // in Slow Memory
 
-void setOffset() {
-  M5.Lcd.println("Zero point calibrating...");
-  if (scale.is_ready()) {
-    offset = scale.read();
+void waitScaleReady() {
+  while (true) {
+    if (scale.is_ready()) {
+      break;
+    }
   }
 }
 
-float measureWeight() {
-  if (scale.is_ready()) {
-    float reading = (scale.read() - (float)offset) / DIV;
-    if (reading >= 0) {
-      M5.Lcd.println("Measuring... data: " + String(reading));
-      return reading;
-    } else {
-      M5.Lcd.println("Measurement failed! data: " + String(reading));
-      return -1;
+void setOffset() {
+  M5.Lcd.println("Zero point calibrating...");
+  long tmp_offset = 0;
+  for (int i = 0; i < ROUND; i++) {
+    if (scale.is_ready()) {
+      tmp_offset = tmp_offset + scale.read();
+      waitScaleReady();
     }
+  }
+  offset = tmp_offset / ROUND;
+}
+
+float measureWeight() {
+  long tmp_reading = 0;
+  for (int i = 0; i < ROUND; i++) {
+    if (scale.is_ready()) {
+      tmp_reading = tmp_reading + scale.read();
+      waitScaleReady();
+    }
+  }
+  float reading = (tmp_reading / ROUND - (float)offset) / DIV;
+  if (reading >= 0) {
+    M5.Lcd.println("Measuring... data: " + String(reading));
+    return reading;
   } else {
-    M5.Lcd.println("Measurement failed! Scale is not ready.");
+    M5.Lcd.println("Measurement failed! data: " + String(reading));
     return -1;
   }
 }
