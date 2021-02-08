@@ -11,11 +11,11 @@ const int ADVERTISING_TIME = 3;               // Advertising time length (sec)
 // Load cell configs
 const int LOADCELL_DOUT_PIN = 2;
 const int LOADCELL_SCK_PIN = 3;
-const long DIV = 476;                         // TODO Calibration
+const long long DIV = 476;                         // TODO Calibration
 const int ROUND = 30;                         // Number of repeated measurements to improve measurement accuracy
 
 HX711 scale;
-RTC_DATA_ATTR long offset = 0;                // in Slow Memory
+RTC_DATA_ATTR long long offset = 0;                // in Slow Memory
 
 void waitScaleReady() {
   while (true) {
@@ -27,7 +27,7 @@ void waitScaleReady() {
 
 void setOffset() {
   M5.Lcd.println("Zero point calibrating...");
-  long tmp_offset = 0;
+  long long tmp_offset = 0;
   for (int i = 0; i < ROUND; i++) {
     if (scale.is_ready()) {
       tmp_offset = tmp_offset + scale.read();
@@ -38,7 +38,7 @@ void setOffset() {
 }
 
 float measureWeight() {
-  long tmp_reading = 0;
+  long long tmp_reading = 0;
   for (int i = 0; i < ROUND; i++) {
     if (scale.is_ready()) {
       tmp_reading = tmp_reading + scale.read();
@@ -56,15 +56,21 @@ float measureWeight() {
 }
 
 void setAdvertisementData(BLEAdvertising *pAdvertising) {
-  uint16_t data = (uint16_t)(measureWeight() * 100);            // User Payload (2byte)
+  uint64_t data = (uint64_t)(measureWeight() * 100); // User Payload (8byte)
   std::string strData = "";
-  strData += (char)0xff;                      // AD Type (Manufacturer Specific Data)
-  strData += (char)((data >> 8) & 0xff);      // User Payload High byte
-  strData += (char)(data & 0xff);             // User Payload Low byte
-  strData = (char)strData.length() + strData; // Length (AdvertisementData PDU)
+  strData += (char)0xff;                             // AD Type (Manufacturer Specific Data)
+  strData += (char)((data >> 56) & 0xff);
+  strData += (char)((data >> 48) & 0xff);
+  strData += (char)((data >> 40) & 0xff);
+  strData += (char)((data >> 32) & 0xff);
+  strData += (char)((data >> 24) & 0xff);
+  strData += (char)((data >> 16) & 0xff);
+  strData += (char)((data >> 8) & 0xff);
+  strData += (char)(data & 0xff);
+  strData = (char)strData.length() + strData;        // Length (AdvertisementData PDU)
   BLEAdvertisementData oAdvertisementData = BLEAdvertisementData();
   oAdvertisementData.setName(DEVICE_NAME);
-  oAdvertisementData.setFlags(0x06);          // LE General Discoverable Mode | BR_EDR_NOT_SUPPORTED
+  oAdvertisementData.setFlags(0x06);                 // LE General Discoverable Mode | BR_EDR_NOT_SUPPORTED
   oAdvertisementData.addData(strData);
   pAdvertising->setAdvertisementData(oAdvertisementData);
 }
