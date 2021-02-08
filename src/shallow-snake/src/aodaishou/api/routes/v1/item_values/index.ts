@@ -2,6 +2,7 @@ import { Router } from 'express'
 import passport from 'passport'
 import { Item } from '../../../entity/Item'
 import { ItemValue } from '../../../entity/ItemValue'
+import isAuthenticated from '../../../middleware/isAuthenticated'
 
 const router = Router()
 
@@ -42,5 +43,19 @@ router.post(
     return res.status(200).json({ message: 'success' })
   }
 )
+
+router.get('/:id', isAuthenticated, async (req, res) => {
+  if (req.params.id) {
+    const itemId = Number(req.params.id)
+    const item = await Item.findOne(
+      { id: itemId },
+      { relations: ['itemValues'] }
+    )
+    const itemValues = item?.itemValues
+    return res.json(itemValues)
+  } else {
+    return res.status(400).send
+  }
+})
 
 export default router
