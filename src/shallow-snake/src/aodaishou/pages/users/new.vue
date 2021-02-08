@@ -1,7 +1,7 @@
 <template>
   <div id="sessions-new">
     <div class="text-center">
-      <h1>welcome back, dear wild gecko.</h1>
+      <h1>Hello , Brand new world.</h1>
       <Logo />
     </div>
     <div class="container my-2" style="max-width: 720px">
@@ -10,14 +10,8 @@
         :error="error"
         :on-submit="onSubmit"
         :on-reset="onReset"
-        submit-text="Signup"
+        submit-text="Sign up"
       ></SignupForm>
-      <div class="text-center my-2">
-        <p>
-          New to Sparkling-Gecko?
-          <b-link>Create account.</b-link>
-        </p>
-      </div>
     </div>
   </div>
 </template>
