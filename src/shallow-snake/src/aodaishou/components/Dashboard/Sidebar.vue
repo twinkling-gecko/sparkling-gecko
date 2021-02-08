@@ -6,6 +6,14 @@
       to="/dashboard"
       >Dashboard</b-button
     >
+    <b-button
+      block
+      :variant="
+        buttonVariant('/dashboard/items') ? 'secondary' : 'outline-secondary'
+      "
+      to="/dashboard/items"
+      >Items</b-button
+    >
   </div>
 </template>
 <script>

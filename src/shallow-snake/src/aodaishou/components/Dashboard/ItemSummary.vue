@@ -86,7 +86,7 @@ export default Vue.extend({
       const labels = []
       const data = []
       itemValues.forEach((itemValue) => {
-        labels.push(itemValues.ovservedAt)
+        labels.push(itemValues.observedAt)
         data.push(itemValue.value)
       })
 
