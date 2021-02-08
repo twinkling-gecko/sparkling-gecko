@@ -20,8 +20,8 @@ export class Item extends BaseEntity {
   @Column('varchar')
   name: string
 
-  @Column({ type: 'varchar', name: 'image_url' })
-  imageUrl: string
+  @Column({ type: 'varchar', name: 'image_url', nullable: true })
+  imageUrl: string | null
 
   @CreateDateColumn({
     type: 'timestamp',
