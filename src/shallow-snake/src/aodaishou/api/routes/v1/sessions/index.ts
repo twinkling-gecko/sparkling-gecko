@@ -24,11 +24,14 @@ router.post('/new', (req, res) => {
     {
       session: true,
     },
-    (_err, _user, info) => {
-      if (info) {
-        return res.status(400).json({ message: info.message })
+    (_err, user, info) => {
+      if (user) {
+        req.logIn(user, () => {
+          res.status(200).json({ message: 'success' })
+        })
+      } else {
+        res.status(400).json({ message: info.message })
       }
-      res.status(200).json({ message: 'success' })
     }
   )(req, res)
 })
