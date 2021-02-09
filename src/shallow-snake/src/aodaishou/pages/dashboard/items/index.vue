@@ -6,7 +6,7 @@
       </b-col>
       <b-col sm="9" width="100%">
         <h1>Items</h1>
-        <ItemRegisterModal />
+        <ItemRegisterModal class="text-right" />
         <ItemList :items="items" />
       </b-col>
     </b-row>

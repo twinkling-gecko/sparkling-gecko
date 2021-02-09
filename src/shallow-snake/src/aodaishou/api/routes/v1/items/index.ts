@@ -4,6 +4,7 @@ import { ItemBody } from '../../../validators'
 import '../../../passport'
 import isAuthenticated from '../../../middleware/isAuthenticated'
 import { Item, User } from '../../../entity'
+import { ItemHandler } from '../../../handler/items_handler'
 
 const router = Router()
 
@@ -23,7 +24,7 @@ router.post('/new', isAuthenticated, async (req: Request, res) => {
   const user = req.user as User
   const itemBody = new ItemBody()
   itemBody.name = req.body.name
-  itemBody.imageUrl = req.body.image_url
+  itemBody.imageUrl = req.body.imageUrl
 
   let errors = await validate(itemBody)
   if (errors.length > 0)
@@ -45,6 +46,41 @@ router.post('/new', isAuthenticated, async (req: Request, res) => {
     return res.status(200).json({ message: 'success' })
   } catch (errors) {
     return res.status(400).json(errors)
+  }
+})
+
+router.patch('/:id', isAuthenticated, async (req, res) => {
+  const id = parseInt(req.params.id)
+  const itemBody = new ItemBody()
+  itemBody.name = req.body.name
+  itemBody.imageUrl = req.body.imageUrl
+
+  const errors = await validate(itemBody)
+  if (errors.length > 0)
+    return res
+      .status(400)
+      .json({ message: 'Invalid params', validateError: errors })
+
+  try {
+    const users = await ItemHandler.updateItem(
+      id,
+      req.user as User,
+      itemBody.name,
+      itemBody.imageUrl
+    )
+    res.status(200).json(users)
+  } catch (errors) {
+    res.status(400).json(errors)
+  }
+})
+
+router.get('/:id', isAuthenticated, async (req, res) => {
+  const id = parseInt(req.params.id)
+  try {
+    const item = await Item.findOne(id)
+    res.status(200).json(item)
+  } catch (errors) {
+    res.status(400).json(errors)
   }
 })
 

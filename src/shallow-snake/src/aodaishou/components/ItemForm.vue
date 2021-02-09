@@ -12,7 +12,7 @@
     <b-form-group label="Image URL" label-form="Image URL">
       <b-form-input
         id="image-url"
-        v-model="form.image_url"
+        v-model="form.imageUrl"
         type="text"
         required
         placeholder="Enter Image URL"
@@ -33,7 +33,7 @@ export default Vue.extend({
       type: Object,
       default: () => ({
         name: '',
-        image_url: '',
+        imageUrl: '',
       }),
     },
     onSubmit: {
