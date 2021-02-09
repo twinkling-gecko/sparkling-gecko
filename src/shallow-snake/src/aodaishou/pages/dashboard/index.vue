@@ -61,7 +61,7 @@
         <div class="my-4">
           <h2>Sensors status</h2>
           <div class="text-right">
-            <nuxt-link to="#">Show All Sensors</nuxt-link>
+            <nuxt-link to="/dashboard/sensors">Show All Sensors</nuxt-link>
           </div>
           <div class="my-2">
             <b-card>

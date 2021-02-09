@@ -11,6 +11,12 @@
     >
     <b-button
       block
+      :variant="buttonVariant('/dashboard/sensors')"
+      to="/dashboard/sensors"
+      >Sensors</b-button
+    >
+    <b-button
+      block
       :variant="buttonVariant('/dashboard/notifications')"
       to="/dashboard/notifications"
       >Notifications</b-button
