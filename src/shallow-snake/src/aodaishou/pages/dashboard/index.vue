@@ -6,10 +6,13 @@
       </b-col>
       <b-col sm="9" width="100%">
         <h1>DashBoard</h1>
+        <p class="lead">Welcome home! How was your day?</p>
         <div class="my-4">
           <h2>Top Notifications</h2>
           <div class="text-right">
-            <nuxt-link to="#">Show All Notifications</nuxt-link>
+            <nuxt-link to="/dashboard/notifications"
+              >Show All Notifications</nuxt-link
+            >
           </div>
           <div class="my-2">
             <b-alert show variant="warning">

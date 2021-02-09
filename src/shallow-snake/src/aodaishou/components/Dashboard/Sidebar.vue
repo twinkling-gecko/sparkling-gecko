@@ -9,6 +9,12 @@
       to="/dashboard/items"
       >Items</b-button
     >
+    <b-button
+      block
+      :variant="buttonVariant('/dashboard/notifications')"
+      to="/dashboard/notifications"
+      >Notifications</b-button
+    >
   </div>
 </template>
 <script>
