@@ -18,7 +18,9 @@
     <b-card-text class="sensor-text">
       Interval: {{ sensor.interval }}
     </b-card-text>
-    <b-button href="/items" variant="primary">Edit</b-button>
+    <b-link :to="`/dashboard/items/${item.id}/edit`" variant="primary">
+      Edit
+    </b-link>
   </b-card>
 </template>
 
@@ -29,6 +31,7 @@ export default Vue.extend({
     item: {
       type: Object,
       default: () => ({
+        id: 0,
         name: '',
         imageUrl: '',
       }),
