@@ -1,11 +1,8 @@
 <template>
-  <b-card
-    :sub-title="item.name"
-    :img-src="item.imageUrl"
-    img-width="150"
-    img-height="150"
-    img-left
-  >
+  <b-card :img-src="item.imageUrl" img-width="150" img-height="150" img-left>
+    <b-card-title class="h6">
+      <nuxt-link to="#">{{ item.name }}</nuxt-link>
+    </b-card-title>
     <!-- vue-chartjsのmixinsがこれで定義されているので除外するしか無い -->
     <!-- eslint-disable vue/attribute-hyphenation -->
     <b-card-text>
