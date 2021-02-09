@@ -6,6 +6,10 @@
       </b-col>
       <b-col sm="9" width="100%">
         <h1>Items</h1>
+        <p class="lead">
+          They are only expendable. They are destined to disappear. At the very
+          least, I'll see them through.
+        </p>
         <ItemRegisterModal class="text-right" />
         <ItemList :items="items" />
       </b-col>
