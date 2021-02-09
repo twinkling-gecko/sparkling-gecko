@@ -49,7 +49,7 @@ export default Vue.extend({
           this.$store.dispatch('fetchUser')
         })
         .then(() => {
-          this.$router.push('/')
+          this.$router.push('/dashboard')
         })
         // FIXME: 失敗したことをユーザーに通知
         .catch((err: Error) => {
