@@ -7,20 +7,19 @@
     :img-src="item.imageUrl"
     img-left
   >
-    <b-card-text class="sensor-text">
-      <b-icon
-        class="status-icon text-center"
-        icon="exclamation-circle-fill"
-        :variant="isActive"
-      ></b-icon>
+    <b-alert v-if="sensor.status !== 'active'" show variant="danger">
+      Unable to connect to sensor "zyuryo7"! Where and what is that girl doing now...
+    </b-alert>
+    <b-card-text class="sensor-text mb-1">
+      <b-icon icon="exclamation-circle-fill" :variant="isActive"></b-icon>
       Sensor: {{ sensor.name }}
     </b-card-text>
     <b-card-text class="sensor-text">
       Interval: {{ sensor.interval }}
     </b-card-text>
-    <b-link :to="`/dashboard/items/${item.id}/edit`" variant="primary">
+    <b-button :to="`/dashboard/items/${item.id}/edit`" variant="primary">
       Edit
-    </b-link>
+    </b-button>
   </b-card>
 </template>
 
@@ -56,6 +55,4 @@ export default Vue.extend({
 <style lang="sass" scoped>
 .sensor-text
   color: #95a5a6
-.status-icon
-  float: left
 </style>
