@@ -1,16 +1,11 @@
 <template>
   <div class="gecko-sidebar h-100">
-    <b-button
-      block
-      :variant="buttonVariant('/dashboard') ? 'secondary' : 'outline-secondary'"
-      to="/dashboard"
+    <b-button block :variant="buttonVariant('/dashboard')" to="/dashboard"
       >Dashboard</b-button
     >
     <b-button
       block
-      :variant="
-        buttonVariant('/dashboard/items') ? 'secondary' : 'outline-secondary'
-      "
+      :variant="buttonVariant('/dashboard/items')"
       to="/dashboard/items"
       >Items</b-button
     >
