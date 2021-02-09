@@ -5,7 +5,7 @@ export default [
     item: 'ビーフィータージン 700ml',
     status: 'active',
     interval: '30m',
-    battery: 85,
+    battery: 90,
   },
   {
     id: 4,
@@ -14,7 +14,7 @@ export default [
       'AGF ちょっと贅沢な珈琲店 レギュラー・コーヒー プレミアムドリップ モカ・ブレンド 14袋',
     status: 'active',
     interval: '1d',
-    battery: 73,
+    battery: 95,
   },
   {
     id: 5,
@@ -22,7 +22,7 @@ export default [
     item: 'アリエール イオンパワージェル サイエンスプラス 1.0kg',
     status: 'active',
     interval: '30m',
-    battery: 23,
+    battery: 96,
   },
   {
     id: 6,
