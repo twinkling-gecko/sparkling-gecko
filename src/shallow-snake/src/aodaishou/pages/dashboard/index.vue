@@ -72,7 +72,7 @@
                 ></b-icon>
                 zyuryo7
               </b-card-title>
-              <b-text>
+              <b-card-text>
                 <div class="my-2">
                   <b-alert show variant="danger">
                     Unable to connect to sensor "zyuryo7"! Where and what is
@@ -98,7 +98,7 @@
                     show-progress
                   />
                 </div>
-              </b-text>
+              </b-card-text>
             </b-card>
           </div>
         </div>
