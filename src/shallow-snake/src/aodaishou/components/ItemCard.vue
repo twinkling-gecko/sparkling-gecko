@@ -1,15 +1,15 @@
 <template>
   <b-card
-    class="card-container align-items-center"
+    class="align-items-center my-2 mx-2"
+    img-height="240"
+    img-width="240"
     :sub-title="item.name"
     :img-src="item.imageUrl"
-    img-width="150"
-    img-height="150"
     img-left
   >
     <b-card-text class="sensor-text">
       <b-icon
-        class="status-icon mr-2 mt-1 text-center"
+        class="status-icon text-center"
         icon="exclamation-circle-fill"
         :variant="isActive"
       ></b-icon>
@@ -54,9 +54,6 @@ export default Vue.extend({
 </script>
 
 <style lang="sass" scoped>
-.card-container
-  width: 360px
-  min-height: 240px
 .sensor-text
   color: #95a5a6
 .status-icon

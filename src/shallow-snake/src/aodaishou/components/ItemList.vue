@@ -1,8 +1,8 @@
 <template>
   <div class="m-2">
-    <div v-for="item in items" :key="item.id" class="card-container mx-2 my-1">
+    <b-card-group v-for="item in items" :key="item.id" deck>
       <ItemCard :item="item" :sensor="asignedSensor(item.id)" />
-    </div>
+    </b-card-group>
   </div>
 </template>
 
@@ -26,8 +26,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-<style lang="sass" scoped>
-.card-container
-  float: left
-</style>
