@@ -39,7 +39,7 @@
                   girl doing now...
                 </b-alert>
                 <div class="text-right">
-                  <b-button>Edit</b-button>
+                  <b-button variant="primary">Edit</b-button>
                 </div>
               </div>
               <div class="my-2">
