@@ -57,7 +57,7 @@
                 <b-progress
                   :value="sensor.battery"
                   max="100"
-                  variant="warning"
+                  variant="success"
                   show-progress
                 />
               </div>
