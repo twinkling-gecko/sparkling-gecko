@@ -46,7 +46,7 @@
         <div class="my-4">
           <h2>Recent Items</h2>
           <div class="text-right">
-            <nuxt-link to="#">Show All Items</nuxt-link>
+            <nuxt-link to="/dashboard/items">Show All Items</nuxt-link>
           </div>
           <ItemSummary
             v-for="item in items"
