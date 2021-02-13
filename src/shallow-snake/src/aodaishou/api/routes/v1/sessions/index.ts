@@ -18,15 +18,23 @@ const router = Router()
  *           result:
  *             message: string
  */
-router.post(
-  '/new',
-  passport.authenticate('local', {
-    session: true,
-  }),
-  (_, res) => {
-    res.status(200).json({ message: 'success' })
-  }
-)
+router.post('/new', (req, res) => {
+  passport.authenticate(
+    'local',
+    {
+      session: true,
+    },
+    (_err, user, info) => {
+      if (user) {
+        req.logIn(user, () => {
+          res.status(200).json({ message: 'success' })
+        })
+      } else {
+        res.status(400).json({ message: info.message })
+      }
+    }
+  )(req, res)
+})
 
 /**
  * @swagger

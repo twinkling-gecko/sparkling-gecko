@@ -10,6 +10,7 @@
         :error="error"
         :on-submit="onSubmit"
         :on-reset="onReset"
+        :validate-error="validateError"
         submit-text="Signup"
       ></SignupForm>
       <div class="text-center my-2">
@@ -33,6 +34,7 @@ export default Vue.extend({
         password: '',
       },
       error: '',
+      validateError: [],
     }
   },
   methods: {
@@ -42,11 +44,18 @@ export default Vue.extend({
       this.$axios
         .post('/api/v1/users/new', this.form)
         .then(() => this.$axios.post('/api/v1/sessions/new', this.form))
+        .then(() => this.onReset(event))
         .then(() => this.$store.dispatch('fetchUser'))
         .then(() => this.$router.push('/'))
-        .catch((err: Error) => (this.error = err.toString()))
+        .catch((err) => {
+          this.error = err.response.data.errorMessage
+          if (err.response.data.validateError) {
+            this.validateError = err.response.data.validateError
+          } else {
+            this.validateError = []
+          }
+        })
     },
-
     onReset(event: Event) {
       event.preventDefault()
 

@@ -8,15 +8,10 @@ const router = Router()
 
 /**
  * @swagger
- * /api/v1/sessions/me:
- *   get:
+ * /api/v1/users/new:
+ *   post:
  *     tags: [v1]
- *     description: user description
- *     responses:
- *       200:
- *         examples:
- *           result:
- *             email: string
+ *     description: user signup
  */
 router.post('/new', async (req, res) => {
   // リクエストの確認
@@ -26,22 +21,22 @@ router.post('/new', async (req, res) => {
 
   const errors = await validate(signupBody)
   if (errors.length > 0) {
-    // TODO: バリデーションエラー時の詳細なメッセージ表示
-    return res.status(400).json(errors)
+    return res
+      .status(400)
+      .json({ errorMessage: 'Invalid params', validateError: errors })
   }
 
   // emailの重複確認
   const userByEmail = await User.find({ email: signupBody.email })
   if (userByEmail.length > 0) {
-    return res.status(400).json({ message: 'This email is already exist' })
+    return res.status(400).json({ errorMessage: 'This email is already exist' })
   }
 
   try {
     await UsersHandler.createUser(signupBody.email, signupBody.password)
     return res.status(200).json({ message: 'success' })
   } catch (err) {
-    // 例外発生時の詳細なメッセージ表示
-    return res.status(400).json({ message: err })
+    return res.status(500).json({ errorMessage: 'Internal server error' })
   }
 })
 
