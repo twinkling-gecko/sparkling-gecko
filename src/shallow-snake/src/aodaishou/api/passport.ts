@@ -19,7 +19,7 @@ passport.use(
 
       const isCompared = await comparePlainWithHash(
         password,
-        user?.encrypted_password || ''
+        user?.encryptedPassword || ''
       )
 
       if (user && isCompared) {

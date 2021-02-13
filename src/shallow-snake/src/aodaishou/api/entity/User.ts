@@ -20,8 +20,8 @@ export class User extends BaseEntity {
   @IsEmail()
   email: string
 
-  @Column('text')
-  encrypted_password: string
+  @Column({ type: 'text', name: 'encrypted_password' })
+  encryptedPassword: string
 
   @Column('text')
   token: string
